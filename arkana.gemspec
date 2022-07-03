@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version = Arkana::VERSION
   spec.authors = ["Roger Oba"]
   spec.email = ["rogerluan.oba@gmail.com"]
-  spec.license = 'BSD-2-Clause'
+  spec.license = "BSD-2-Clause"
   spec.summary = "Store your keys and secrets away from your source code. Designed for Android and iOS projects."
   spec.homepage = "https://github.com/rogerluan/arkana"
   spec.required_ruby_version = ">= 2.7.0"
@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = "https://github.com/rogerluan/arkana"
   spec.metadata["changelog_uri"] = "https://github.com/rogerluan/arkana/blob/main/CHANGELOG.md"
 
-  spec.files = Dir['lib/**/*.{rb,erb}'] + Dir['bin/*']
+  spec.files = Dir["lib/**/*.{rb,erb}"] + Dir["bin/*"]
   spec.executables = ["arkana"]
   spec.require_paths = ["lib"]
 
