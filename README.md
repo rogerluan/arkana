@@ -163,7 +163,7 @@ Key security is difficult. Right now even the biggest apps get their keys [leake
 
 So in summary, the ideal way to store keys is to not store keys. In reality though most Apps embed keys, and this does that and adds some rudimentary obfuscation to the keys. A well motivated app cracker could probably extract this within a few minutes however.
 
-<sub>This excerpt has been copied in its entirety from https://github.com/orta/cocoapods-keys#security - 100% credit goes to @orta and its maintainers.</sub>
+<sub>This excerpt has been copied in its entirety from https://github.com/orta/cocoapods-keys#security - 100% credit goes to [@orta](https://twitter.com/orta) and its maintainers.</sub>
 
 ## Why not [`cocoapods-keys`](https://github.com/orta/cocoapods-keys)?
 
@@ -196,7 +196,7 @@ The only down side of using this strategy is that you wouldn't want to use it if
 
 The word arcanum (pluralized as "arcana", here spelled as "Arkana") came from Latin arcanus, meaning "secret", and entered English as the Dark Ages gave way to the Renaissance.[²](https://www.merriam-webster.com/dictionary/arcanum)
 
-Special thanks to @danilobecke for the inspiration and heavy lifting, and to @orta for the creation of https://github.com/orta/cocoapods-keys which this project is based off of.
+Special thanks to [@danilobecke](https://github.com/danilobecke) for the inspiration and heavy lifting, and to [@orta](https://twitter.com/orta) for the creation of https://github.com/orta/cocoapods-keys which this project is based off of.
 
 # Development
 
