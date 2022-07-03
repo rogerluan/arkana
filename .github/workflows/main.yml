@@ -22,7 +22,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: coverage
-        path: coverage
+        path: coverage/coverage.json
   coverage:
     needs: [ test ]
     name: Publish Code Coverage
