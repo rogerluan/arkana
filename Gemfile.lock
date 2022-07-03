@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arkana (1.0.0)
+    arkana (1.0.1)
       colorize (~> 0.8)
       dotenv (~> 2.7)
       yaml (~> 0.2)
