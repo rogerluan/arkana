@@ -38,4 +38,4 @@ jobs:
       uses: paambaati/codeclimate-action@v3.0.0
       with:
         debug: true
-        coverageLocations: "${{github.workspace}}/coverage/coverage.json:simplecov"
+        coverageLocations: "${{github.workspace}}/coverage.json:simplecov"
