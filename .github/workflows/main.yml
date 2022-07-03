@@ -1,4 +1,4 @@
-name: Build, Test & Lint
+name: Tests & Linter
 on: [push, pull_request]
 jobs:
   test:
