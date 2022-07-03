@@ -2,6 +2,8 @@ name: Build, Test & Lint
 on: [push, pull_request]
 jobs:
   test:
+    env:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     strategy:
       fail-fast: false
       matrix:
@@ -19,10 +21,10 @@ jobs:
   coverage:
     needs: [ test ]
     name: Publish Code Coverage
+    env:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     runs-on: ubuntu-latest
     steps:
     - uses: paambaati/codeclimate-action@v3.0.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
         debug: true
