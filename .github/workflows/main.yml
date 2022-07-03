@@ -19,26 +19,31 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: bundle exec rake
-    - name: Upload Coverage Report Artifact # So it's accessible in other jobs
-      uses: actions/upload-artifact@v3
+    # - run: bundle exec rake
+    - uses: paambaati/codeclimate-action@v3.0.0
       with:
-        name: coverage
-        path: ./coverage
-  coverage:
-    needs: [ test ]
-    name: Publish Code Coverage
-    continue-on-error: true
-    env:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download Coverage Report Artifact from "Test" Job
-      uses: actions/download-artifact@v3
-      with:
-        name: coverage
-        path: ./coverage
-    - name: Upload Code Coverage Report to Code Climate
-      uses: paambaati/codeclimate-action@v3.0.0
-      with:
+        coverageCommand: bundle exec rake
         debug: true
+    # - name: Upload Coverage Report Artifact # So it's accessible in other jobs
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: coverage
+    #     path: ./coverage
+  # coverage:
+  #   needs: [ test ]
+  #   name: Publish Code Coverage
+  #   continue-on-error: true
+  #   env:
+  #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Download Coverage Report Artifact from "Test" Job
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: coverage
+  #       path: ./coverage
+  #   - name:
+  #   - name: Upload Code Coverage Report to Code Climate
+  #     uses: paambaati/codeclimate-action@v3.0.0
+  #     with:
+  #       debug: true
