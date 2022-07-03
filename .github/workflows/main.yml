@@ -22,7 +22,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: coverage
-        path: coverage/coverage.json
+        path: ./coverage
   coverage:
     needs: [ test ]
     name: Publish Code Coverage
@@ -35,9 +35,8 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: coverage
+        path: ./coverage
     - name: Upload Code Coverage Report to Code Climate
       uses: paambaati/codeclimate-action@v3.0.0
       with:
         debug: true
-        coverageLocations: "${{ github.workspace }}/coverage.json:simplecov"
-        prefix: "${{ github.workspace }}/lib"
