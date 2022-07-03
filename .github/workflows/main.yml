@@ -23,8 +23,9 @@ jobs:
     needs: [ test ]
     name: Publish Code Coverage
     runs-on: ubuntu-latest
-    uses: paambaati/codeclimate-action@v3.0.0
-    env:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-    with:
-      debug: true
+    steps:
+    - uses: paambaati/codeclimate-action@v3.0.0
+      env:
+        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      with:
+        debug: true
