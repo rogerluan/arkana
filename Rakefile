@@ -17,5 +17,5 @@ task :test_swift do
   Dir.chdir("tests/MySecrets") do
     sh("swift test")
   end
-  FileUtils.rm_rf('tests')
+  FileUtils.rm_rf("tests")
 end
