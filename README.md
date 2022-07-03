@@ -26,6 +26,8 @@
   </a>
 
   <p align="center">
+    <a href="#preview">View Demo</a>
+    ·
     <a href="https://github.com/rogerluan/arkana/issues/new/choose">Report Bug</a>
     ·
     <a href="https://github.com/rogerluan/arkana/issues/new/choose">Request Feature</a>
@@ -44,10 +46,12 @@ Your project must be using Swift Package Manager or Cocoapods as dependency mana
 
 The Java/Kotlin code generator hasn't been implemented yet. Star this project and check back in the future, or help us build it [here](https://github.com/rogerluan/arkana/issues/1).
 
-## Demo
+## Preview
 
-<details><summary>_Click here to show an image with the preview!_</summary>
+<details><summary>Click here to show an image with the preview!</summary>
 <p>
+
+The image below shows how the auto-generated file looks like. At the bottom of it you can see how you'll consume the code generated.
 
 <div align="center">
   <img src="docs/swift-demo.png">
