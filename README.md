@@ -1,5 +1,29 @@
 # Arkana
 
+<div align="center">
+  <img width=100 src="docs/logo.png">
+  <h1>Arkana</h1>
+  <p><strong>Store your keys and secrets away from your source code. Designed for Android and iOS projects.</strong></p>
+  <a href="https://github.com/rogerluan/arkana/releases">
+    <img alt="Latest Release" src="https://img.shields.io/github/v/release/rogerluan/arkana?sort=semver">
+  </a>
+  <a href="https://github.com/rogerluan/arkana/actions">
+    <img alt="Build Status" src="https://github.com/rogerluan/arkana/workflows/Build,%20Test%20&%20Lint/badge.svg">
+  </a>
+  <a href="https://github.com/rogerluan/arkana/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/rogerluan/arkana?color=#86D492" />
+  </a>
+  <a href="https://twitter.com/intent/follow?screen_name=rogerluan_">
+    <img src="https://img.shields.io/twitter/follow/rogerluan_?&logo=twitter" alt="Follow on Twitter">
+  </a>
+
+  <p align="center">
+    <a href="https://github.com/rogerluan/arkana/issues/new/choose">Report Bug</a>
+    ·
+    <a href="https://github.com/rogerluan/arkana/issues/new/choose">Request Feature</a>
+  </p>
+</div>
+
 noun ‧ secret knowledge[¹](https://en.wiktionary.org/wiki/arkana)
 
 ar‧ka‧na | \är-​ˈkā-​nə\
