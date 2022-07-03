@@ -1,0 +1,7 @@
+import_name: 'MySecrets'
+namespace: 'MySecrets'
+pod_name: 'MySecrets'
+result_path: 'tests'
+swift_declaration_strategy: lazy_var
+should_generate_unit_tests: true
+package_manager: spm

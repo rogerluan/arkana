@@ -1,0 +1,12 @@
+name: Run Swift Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+    - uses: fwal/setup-swift@v1
+    - uses: actions/checkout@v2
+    - name: Set Up Bundle
+      run: bundle install
+    - name: Generate Swift Code & Run Tests
+      run: bundle exec rake test_swift
