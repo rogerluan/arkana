@@ -34,7 +34,7 @@
 
 # Requirements
 
-## **iOS**
+## iOS
 
 Your project must be using Swift Package Manager or Cocoapods as dependency manager (or both). No support for Carthage.
 
@@ -43,6 +43,18 @@ Your project must be using Swift Package Manager or Cocoapods as dependency mana
 ## Android
 
 The Java/Kotlin code generator hasn't been implemented yet. Star this project and check back in the future, or help us build it [here](https://github.com/rogerluan/arkana/issues/1).
+
+## Demo
+
+<details><summary>_Click here to show an image with the preview!_</summary>
+<p>
+
+<div align="center">
+  <img src="docs/swift-demo.png">
+</div>
+
+</p>
+</details>
 
 # Installation
 

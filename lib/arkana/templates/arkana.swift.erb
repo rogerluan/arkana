@@ -11,7 +11,7 @@ public enum <%= @namespace %> {
     ]
 
     static func decode(encoded: [UInt8], cipher: [UInt8]) -> String {
-        return String(decoding: encoded.enumerated().map { (offset, element) in
+        return String(decoding: encoded.enumerated().map { offset, element in
             element ^ cipher[offset % cipher.count]
         }, as: UTF8.self)
     }
