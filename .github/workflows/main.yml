@@ -18,6 +18,11 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: bundle exec rake
+    - name: Upload Coverage Report Artifact # So it's accessible in other jobs
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage
+        path: coverage/.resultset.json
   coverage:
     needs: [ test ]
     name: Publish Code Coverage
@@ -25,7 +30,12 @@ jobs:
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     runs-on: ubuntu-latest
     steps:
-    - uses: paambaati/codeclimate-action@v3.0.0
+    - name: Download Coverage Report Artifact from "Test" Job
+      uses: actions/download-artifact@v3
+      with:
+        name: homework
+    - name: Upload Code Coverage Report to Code Climate
+      uses: paambaati/codeclimate-action@v3.0.0
       with:
         debug: true
         coverageLocations: "${{github.workspace}}/coverage/.resultset.json:simplecov"
