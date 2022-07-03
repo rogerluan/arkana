@@ -1,8 +1,7 @@
-# Arkana
-
 <div align="center">
-  <img width=100 src="docs/logo.png">
+  <img width=200 src="docs/logo.png">
   <h1>Arkana</h1>
+  <p>noun ‧ secret knowledge<a href="https://en.wiktionary.org/wiki/arkana">¹</a> — ar‧ka‧na | \är-​ˈkā-​nə\</p>
   <p><strong>Store your keys and secrets away from your source code. Designed for Android and iOS projects.</strong></p>
   <a href="https://github.com/rogerluan/arkana/releases">
     <img alt="Latest Release" src="https://img.shields.io/github/v/release/rogerluan/arkana?sort=semver">
@@ -23,12 +22,6 @@
     <a href="https://github.com/rogerluan/arkana/issues/new/choose">Request Feature</a>
   </p>
 </div>
-
-noun ‧ secret knowledge[¹](https://en.wiktionary.org/wiki/arkana)
-
-ar‧ka‧na | \är-​ˈkā-​nə\
-
-> Store your keys and secrets away from your source code. Designed for Android and iOS projects.
 
 # Requirements
 
