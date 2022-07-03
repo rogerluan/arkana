@@ -33,7 +33,7 @@ jobs:
     - name: Download Coverage Report Artifact from "Test" Job
       uses: actions/download-artifact@v3
       with:
-        name: homework
+        name: coverage
     - name: Upload Code Coverage Report to Code Climate
       uses: paambaati/codeclimate-action@v3.0.0
       with:
