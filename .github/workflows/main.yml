@@ -22,7 +22,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: coverage
-        path: coverage/.resultset.json
+        path: coverage
   coverage:
     needs: [ test ]
     name: Publish Code Coverage
@@ -38,4 +38,3 @@ jobs:
       uses: paambaati/codeclimate-action@v3.0.0
       with:
         debug: true
-        coverageLocations: "${{github.workspace}}/coverage/.resultset.json:simplecov"
