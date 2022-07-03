@@ -4,11 +4,14 @@ jobs:
   test:
     strategy:
       fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
-        ruby: ['2.7', '3.0', '3.1', head, truffleruby, truffleruby-head]
-    runs-on: ${{ matrix.os }}
+      # matrix:
+      #   os: [ubuntu-latest, macos-latest]
+      #   # Due to https://github.com/actions/runner/issues/849, we have to use quotes for '3.0'
+      #   ruby: ['2.7', '3.0', '3.1', head, truffleruby, truffleruby-head]
+      os: macos-latest
+      ruby: '3.1'
+    # runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
@@ -16,3 +19,12 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: bundle exec rake
+  coverage:
+    needs: [ test ]
+    name: Publish Code Coverage
+    runs-on: ubuntu-latest
+    uses: paambaati/codeclimate-action@v3.0.0
+    env:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    with:
+      debug: true

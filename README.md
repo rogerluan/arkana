@@ -6,6 +6,12 @@
   <a href="https://github.com/rogerluan/arkana/releases">
     <img alt="Latest Release" src="https://img.shields.io/github/v/release/rogerluan/arkana?sort=semver">
   </a>
+  <a href="https://codeclimate.com/github/rogerluan/arkana/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/2348095bbc0a13342185/maintainability" />
+  </a>
+  <a href="https://codeclimate.com/github/rogerluan/arkana/test_coverage">
+    <img src="https://api.codeclimate.com/v1/badges/2348095bbc0a13342185/test_coverage" />
+  </a>
   <a href="https://github.com/rogerluan/arkana/actions">
     <img alt="Build Status" src="https://github.com/rogerluan/arkana/workflows/Build,%20Test%20&%20Lint/badge.svg">
   </a>
