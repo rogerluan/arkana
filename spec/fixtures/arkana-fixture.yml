@@ -1,0 +1,19 @@
+import_name: 'MySecrets'
+namespace: 'MySecrets'
+pod_name: 'MySecrets'
+result_path: 'MySecrets'
+flavors:
+  - CornFlakes
+  - FrootLoops
+swift_declaration_strategy: lazy_var
+should_generate_unit_tests: false
+package_manager: cocoapods
+environments:
+  - debug
+  - release
+global_secrets:
+  - Domain
+  - Global
+environment_secrets:
+  - ServiceKey
+  - Server

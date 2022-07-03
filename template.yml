@@ -1,0 +1,19 @@
+import_name: 'ArkanaKeys' # Optional. Name of the framework to be imported. Defaults to ArkanaKeys.
+namespace: 'Keys' # Optional. Namespace used to access the secrets in the codebase. Defaults to ArkanaKeys.
+pod_name: 'ArkanaKeys' # Optional. Name of the pod to be declared in your Podfile. Defaults to ArkanaKeys.
+result_path: 'dependencies' # Optional. Destination path of the generated code, related to the path of this config file. Defaults to ArkanaKeys.
+flavors: # Optional. Flavors are keywords added as a prefix to every secret when reading them from environment variables. This is useful for instance in white-label projects. Check the "Usage" section of the README for more information.
+  - FrostedFlakes
+  - FrootLoops
+swift_declaration_strategy: let # Optional. One of: lazy_var, var, let. Defaults to let.
+should_generate_unit_tests: true # Optional. One of: true, false. Defaults to true.
+package_manager: cocoapods # Optional. One of: spm, cocoapods. If you use both, declare cocoapods. Defaults to spm.
+environments: # Optional. List of environments that will be used to generate secret keys when you have keys that are different between environments (e.g. debug/staging/prod). Defaults to empty.
+  - Debug
+  - Release
+global_secrets: # Optional. List of secrets that are the same regardless of which environment is being built. Defaults to empty.
+  - MySecretAPIKey
+  - AppStoreAppID
+  - BackendDomain
+environment_secrets: # Optional. This will create a secret for each entry in this list, one for each env, appending a suffix corresponding to the name of the env. Defaults to empty.
+  - MyServiceAPIKey # Will lookup for MyServiceAPIKeyDebug and MyServiceAPIKeyRelease env vars (assuming no flavor was declared)

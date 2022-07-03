@@ -1,0 +1,52 @@
+<% require 'arkana/helpers/string' %>
+<% require 'arkana/helpers/swift_template_helper' %>
+<% # TODO: Sort these import statements alphabetically %>
+import Foundation
+import <%= @import_name %>Interfaces
+
+public enum <%= @namespace %> {
+    fileprivate static let salt: [UInt8] = [
+        <%= @salt.formatted %>
+
+    ]
+
+    static func decode(encoded: [UInt8], cipher: [UInt8]) -> String {
+        return String(decoding: encoded.enumerated().map { (offset, element) in
+            element ^ cipher[offset % cipher.count]
+        }, as: UTF8.self)
+    }
+}
+
+public extension <%= @namespace %> {
+    struct Global: <%= @import_name %>GlobalProtocol {
+        public init() {}
+<% for secret in @global_secrets %>
+
+        public <%= @swift_declaration_strategy %> <%= secret.key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> = {
+            let encoded: [UInt8] = [
+                <%= secret.encoded_value %>
+
+            ]
+            return <%= @namespace %>.decode(encoded: encoded, cipher: <%= @namespace %>.salt)
+        }()
+<% end %>
+    }
+}
+
+<% for environment in @environments %>
+public extension <%= @namespace %> {
+    struct <%= environment %>: <%= @import_name %>EnvironmentProtocol {
+        public init() {}
+<% for secret in environment_protocol_secrets(environment) %>
+
+        public <%= @swift_declaration_strategy %> <%= secret.protocol_key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> = {
+            let encoded: [UInt8] = [
+                <%= secret.encoded_value %>
+
+            ]
+            return <%= @namespace %>.decode(encoded: encoded, cipher: <%= @namespace %>.salt)
+        }()
+<% end %>
+    }
+}
+<% end %>

@@ -1,0 +1,41 @@
+import Foundation
+import XCTest
+@testable import <%= @import_name %>
+
+
+final class <%= @namespace %>Tests: XCTestCase {
+    private var salt: [UInt8] = [
+        <%= @salt.formatted %>
+
+    ]
+
+    func test_decodeRandomHexKey_shouldDecode() {
+<% hex_key = SecureRandom.hex(64) %>
+<% secret = generate_test_secret(key: hex_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "<%= hex_key %>")
+    }
+
+    func test_decodeRandomBase64Key_shouldDecode() {
+<% base64_key = SecureRandom.base64(64) %>
+<% secret = generate_test_secret(key: base64_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "<%= base64_key %>")
+    }
+
+    func test_decodeUUIDKey_shouldDecode() {
+<% uuid_key = SecureRandom.uuid %>
+<% secret = generate_test_secret(key: uuid_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "<%= uuid_key %>")
+    }
+}

@@ -1,0 +1,15 @@
+<% require 'arkana/helpers/string' %>
+<% require 'arkana/helpers/swift_template_helper' %>
+import Foundation
+
+public protocol <%= @namespace %>GlobalProtocol {
+<% for secret in @global_secrets %>
+    var <%= secret.protocol_key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> { get }
+<% end %>
+}
+
+public protocol <%= @namespace %>EnvironmentProtocol {
+<% for secret in @environment_secrets.uniq(&:protocol_key) %>
+    var <%= secret.protocol_key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> { get }
+<% end %>
+}

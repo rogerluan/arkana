@@ -1,0 +1,46 @@
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: enable
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/TrailingCommaInArguments:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: true
+  EnforcedStyle: percent
+
+Layout/LineLength:
+  Enabled: false
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Max: 6
+
+Metrics/CyclomaticComplexity:
+  Max: 7
+
+Metrics/BlockLength:
+  IgnoredMethods:
+   - 'describe'
+   - 'context'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+
+Metrics/MethodLength:
+  Enabled: false
