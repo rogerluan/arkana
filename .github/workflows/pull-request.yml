@@ -2,8 +2,6 @@ name: Tests & Linter on PRs
 on: pull_request
 jobs:
   test:
-    env:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     strategy:
       fail-fast: false
       matrix:
