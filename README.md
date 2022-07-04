@@ -38,7 +38,7 @@
 
 ## iOS
 
-Your project must be using Swift Package Manager or Cocoapods as dependency manager (or both). No support for Carthage.
+Your project must be using Swift Package Manager or CocoaPods as dependency manager (or both). No support for Carthage.
 
 <sub>Note: this gem was only tested in macOS environments.</sub>
 
