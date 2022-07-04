@@ -1,9 +1,7 @@
-name: Tests & Linter
-on: [push, pull_request]
+name: Tests & Linter on PRs
+on: pull_request
 jobs:
   test:
-    env:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     strategy:
       fail-fast: false
       matrix:
@@ -17,7 +15,4 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - uses: paambaati/codeclimate-action@v3.0.0
-      with:
-        coverageCommand: bundle exec rake
-        debug: true
+    - run: bundle exec rake
