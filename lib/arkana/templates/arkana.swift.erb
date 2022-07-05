@@ -18,7 +18,7 @@ public enum <%= @namespace %> {
 }
 
 public extension <%= @namespace %> {
-    struct Global: <%= @import_name %>GlobalProtocol {
+    struct Global: <%= @namespace %>GlobalProtocol {
         public init() {}
 <% for secret in @global_secrets %>
 
@@ -35,7 +35,7 @@ public extension <%= @namespace %> {
 
 <% for environment in @environments %>
 public extension <%= @namespace %> {
-    struct <%= environment %>: <%= @import_name %>EnvironmentProtocol {
+    struct <%= environment %>: <%= @namespace %>EnvironmentProtocol {
         public init() {}
 <% for secret in environment_protocol_secrets(environment) %>
 
