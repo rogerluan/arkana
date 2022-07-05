@@ -25,12 +25,12 @@ let package = Package(
             dependencies: ["<%= @import_name %>Interfaces"],
             path: "Sources"
         ),
-        <% if @should_generate_unit_tests %>
+<% if @should_generate_unit_tests %>
         .testTarget(
             name: "<%= @import_name %>Tests",
             dependencies: ["<%= @import_name %>"],
             path: "Tests"
         ),
-        <% end %>
+<% end %>
     ]
 )
