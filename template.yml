@@ -5,7 +5,7 @@ result_path: 'dependencies' # Optional. Destination path of the generated code, 
 flavors: # Optional. Flavors are keywords added as a prefix to every secret when reading them from environment variables. This is useful for instance in white-label projects. Check the "Usage" section of the README for more information.
   - FrostedFlakes
   - FrootLoops
-swift_declaration_strategy: let # Optional. One of: lazy_var, var, let. Defaults to let.
+swift_declaration_strategy: let # Optional. One of: lazy var, var, let. Defaults to let.
 should_generate_unit_tests: true # Optional. One of: true, false. Defaults to true.
 package_manager: cocoapods # Optional. One of: spm, cocoapods. If you use both, declare cocoapods. Defaults to spm.
 environments: # Optional. List of environments that will be used to generate secret keys when you have keys that are different between environments (e.g. debug/staging/prod). Defaults to empty.

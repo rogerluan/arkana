@@ -5,7 +5,7 @@ result_path: 'MySecrets'
 flavors:
   - CornFlakes
   - FrootLoops
-swift_declaration_strategy: lazy_var
+swift_declaration_strategy: lazy var
 should_generate_unit_tests: false
 package_manager: cocoapods
 environments:

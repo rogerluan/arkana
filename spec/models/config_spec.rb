@@ -37,7 +37,7 @@ RSpec.describe Config do
         expect(subject.pod_name).to eq custom_name
         expect(subject.result_path).to eq custom_name
         expect(subject.flavors).to eq %w[CornFlakes FrootLoops]
-        expect(subject.swift_declaration_strategy).to eq "lazy_var"
+        expect(subject.swift_declaration_strategy).to eq "lazy var"
         expect(subject.should_generate_unit_tests).to be_falsey
         expect(subject.package_manager).to eq "cocoapods"
         expect(subject.current_flavor).to be_nil
