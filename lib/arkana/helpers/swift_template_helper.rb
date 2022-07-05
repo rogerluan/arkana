@@ -9,4 +9,12 @@ module SwiftTemplateHelper
     else raise "Unknown variable type '#{type}' received.'"
     end
   end
+
+  def self.protocol_getter(declaration_strategy)
+    case declaration_strategy
+    when "lazy var" then "mutating get"
+    when "var", "let" then "get"
+    else raise "Unknown declaration strategy '#{declaration_strategy}' received.'"
+    end
+  end
 end
