@@ -5,6 +5,7 @@ import Foundation
 import <%= @import_name %>Interfaces
 
 public enum <%= @namespace %> {
+    @inline(__always)
     fileprivate static let salt: [UInt8] = [
         <%= @salt.formatted %>
 
@@ -22,6 +23,7 @@ public extension <%= @namespace %> {
         public init() {}
 <% for secret in @global_secrets %>
 
+        @inline(__always)
         public <%= @swift_declaration_strategy %> <%= secret.key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> = {
             let encoded: [UInt8] = [
                 <%= secret.encoded_value %>
@@ -39,6 +41,7 @@ public extension <%= @namespace %> {
         public init() {}
 <% for secret in environment_protocol_secrets(environment) %>
 
+        @inline(__always)
         public <%= @swift_declaration_strategy %> <%= secret.protocol_key.camel_case %>: <%= SwiftTemplateHelper.swift_type(secret.type) %> = {
             let encoded: [UInt8] = [
                 <%= secret.encoded_value %>
