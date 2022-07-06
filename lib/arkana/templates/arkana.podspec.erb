@@ -12,4 +12,6 @@ Pod::Spec.new do |spec|
   spec.source_files          = 'Sources/**/*.swift'
   spec.ios.deployment_target = '11.0'
   spec.swift_version         = '5.0'
+
+  spec.dependency '<%= @pod_name %>Interfaces', '~> 1.0.0'
 end
