@@ -44,7 +44,9 @@ Your project must be using Swift Package Manager or CocoaPods as dependency mana
 
 ## Android
 
-The Java/Kotlin code generator hasn't been implemented yet. Star this project and check back in the future, or help us build it [here](https://github.com/rogerluan/arkana/issues/1).
+The Java/Kotlin code generator hasn't been implemented yet. Star and "watch" this project and check back in the future, or help us build it [here](https://github.com/rogerluan/arkana/issues/1).
+
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/8419048/177968055-6774ad8e-2ef3-45ed-9e26-fbe73a783083.png">
 
 ## Preview
 
