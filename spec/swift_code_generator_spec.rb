@@ -42,8 +42,15 @@ RSpec.describe SwiftCodeGenerator do
     let(:swift_package_dir) { File.join(config.result_path, config.import_name) }
     let(:interface_swift_package_dir) { File.join(config.result_path, "#{config.import_name}Interfaces") }
 
-    def path(...)
-      Pathname.new(File.join(...))
+    # NOTE: Can't use:
+    # def path(...)
+    #   Pathname.new(File.join(...))
+    # end
+    # Until the minimum target version is Ruby 2.7
+    def path(arg1, arg2, arg3 = nil)
+      arg1and2 = File.join(arg1, arg2)
+      return Pathname.new(arg1and2) unless arg3
+      return Pathname.new(File.join(arg1and2, arg3)) if arg3
     end
 
     it "should generate all necessary directories and files" do
