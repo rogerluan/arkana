@@ -122,25 +122,6 @@ After adding its dependency, you should be able to `import ArkanaKeys` (or the `
 
 We recommend you to add your ArkanaKeys directory to your `.gitignore` since it's an auto-generated code that will change every time you run Arkana (since its salt gets generated on each run). For more information, see [How does it work?](#how-does-it-work)
 
-## Continuous Integration
-
-We advise you not to commit your `.env` files, because of security concerns. They should live in secure Environment Variables in your build (CI/CD) server instead.
-
-Following the [template.yml](template.yml) example file, these would be the variables that would need to be added to your build server env vars:
-
-- `FrootLoopsAppStoreAppID`
-- `FrootLoopsBackendDomain`
-- `FrootLoopsMySecretAPIKey`
-- `FrootLoopsMyServiceAPIKeyDebug`
-- `FrootLoopsMyServiceAPIKeyRelease`
-- `FrostedFlakesAppStoreAppID`
-- `FrostedFlakesBackendDomain`
-- `FrostedFlakesMySecretAPIKey`
-- `FrostedFlakesMyServiceAPIKeyDebug`
-- `FrostedFlakesMyServiceAPIKeyRelease`
-
-It's okay to commit your `.env` files if their potential exposure wouldn't be harmful to your project, for instance when Arkana is being used in a white label project to inject variables but that are not necessarily "secrets" (e.g. app tint color, server domain, etc). You can also use `.env` files to store part of your env vars (only the unsecure ones), and keep the secrets in your build server's env vars.
-
 ## Options
 
 ### `--help`
@@ -184,6 +165,42 @@ This will change the env var lookup method, to this particular order:
 5. If ultimately it couldn't find any env var to populate the key `MySecretAPIKey`, it will throw a validation error.
 
 This means that, if you are working with a white-label project, you can have all your env vars declared in a single `.env` file, or in multiple files like `.env.snowflakes`, `.env.frosties`, etc. This also means that your CI can be configured with the appropriate env vars e.g. `SnowflakesMySecretAPIKey`, `FrostiesMySecretAPIKey`, etc, with no necessity to manage (or git-version) dotenv files at all, which is the ideal way to manage secrets securely in a project.
+
+# Advanced Usage
+
+## Continuous Integration
+
+We advise you not to commit your `.env` files, because of security concerns. They should live in secure Environment Variables in your build (CI/CD) server instead.
+
+Following the [template.yml](template.yml) example file, these would be the variables that would need to be added to your build server env vars:
+
+- `FrootLoopsAppStoreAppID`
+- `FrootLoopsBackendDomain`
+- `FrootLoopsMySecretAPIKey`
+- `FrootLoopsMyServiceAPIKeyDebug`
+- `FrootLoopsMyServiceAPIKeyRelease`
+- `FrostedFlakesAppStoreAppID`
+- `FrostedFlakesBackendDomain`
+- `FrostedFlakesMySecretAPIKey`
+- `FrostedFlakesMyServiceAPIKeyDebug`
+- `FrostedFlakesMyServiceAPIKeyRelease`
+
+It's okay to commit your `.env` files if their potential exposure wouldn't be harmful to your project, for instance when Arkana is being used in a white label project to inject variables but that are not necessarily "secrets" (e.g. app tint color, server domain, etc). You can also use `.env` files to store part of your env vars (only the unsecure ones), and keep the secrets in your build server's env vars.
+
+## Monorepo
+
+If your repository makes use of a [monorepo](https://monorepo.tools/#what-is-a-monorepo) structure, then we recommend using Arkana by defining multiple `.env` files and multiple `.arkana.yml` configuration files, as it's how it was designed to be used.
+
+One of the goals of Arkana was to use the least dotfiles as possible. This made a significant difference when designing for white-label projects (aka project flavors), because traditional dotenv implementation would suggest having multiple dotenv files such as `.env.frootloops` and `.env.frosted` if you had 2 different flavors (note that you can still use multiple dotenv files if you want so (see usage of the `--flavor` option). But what if you're a big agency that distributes to 25, 50, 200 clients? Maybe you don't want to be managing the distribution of 200 dotenv files across your team, and Arkana was designed with that in mind.
+
+However, when it came to monorepo structures, we weighted the pros and cons of both approaches, and ultimately decided to the simplicity of having a set of dotfiles for each individual project, in their respective directory. The reason main reasons were:
+
+- the scale here is different: a project may have hundreds of flavors, but not that many projects.
+- each project already has its own dotfiles in its root directory, most likely, including `.env` files, and with Arkana it wouldn't be any different.
+- each project has its own quirks, so it's more scalable to put the responsibility on the project's directory to deal with its own dotenv files than to have a centralized file that would coordinate each project.
+- the complexity of maintaining a centralized configuration file that manages all projects would be too high to be implemented in Arkana. We aim for simplicity.
+
+If you have questions on how to set this up, feel free to open an issue and we can clarify further how this can be set up.
 
 # FAQ
 
