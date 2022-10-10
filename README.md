@@ -95,7 +95,7 @@ Usage: arkana [options]
 
 Note that you have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
 
-Arkana only has one command, which parses your config file and env vars, generating all the code needed. Arkana should always be run before attempting to build your project, to make sure the files exist *and* are up-to-date (according to the current config file). This means you might need to add the Arkana run command in your CI/CD scripts, _fastlane_, Xcode Build Phases, or something similar.
+Arkana only has one command, which parses your config file and env vars, generating all the code needed. Arkana should always be run before attempting to build your project, to make sure the files exist _and_ are up-to-date (according to the current config file). This means you might need to add the Arkana run command in your CI/CD scripts, _fastlane_, Xcode Build Phases, or something similar.
 
 Once the Arkana has been run, you need to add it to your codebase:
 
