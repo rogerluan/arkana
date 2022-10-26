@@ -11,6 +11,8 @@ package_manager: cocoapods
 environments:
   - debug
   - release
+  - debugPlusMore
+  - ReleasePlusMore
 global_secrets:
   - Domain
   - Global
