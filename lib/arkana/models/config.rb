@@ -32,7 +32,7 @@ class Config
 
   # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
   def initialize(yaml)
-    @environments = (yaml["environments"] || []).map(&:capitalize)
+    @environments = (yaml["environments"] || []).map(&:capitalize_first_letter)
     @environment_secrets = yaml["environment_secrets"] || []
     @global_secrets = yaml["global_secrets"] || []
     default_name = "ArkanaKeys"

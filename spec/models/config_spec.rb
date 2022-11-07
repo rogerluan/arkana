@@ -28,7 +28,7 @@ RSpec.describe Config do
 
     context "when yaml configurations are provided" do
       it "should correctly assign each key/value pair to their respective property" do
-        expect(subject.environments).to eq %w[Debug Release]
+        expect(subject.environments).to eq %w[Debug Release DebugPlusMore ReleasePlusMore]
         expect(subject.environment_secrets).to eq %w[ServiceKey Server]
         expect(subject.global_secrets).to eq %w[Domain Global]
         custom_name = "MySecrets"
@@ -64,7 +64,7 @@ RSpec.describe Config do
 
       context "when there is one or more environment secrets" do
         it "should generate a new key for each environment + environment secret pair" do
-          expect(subject.environment_keys.count).to eq(2 * 2) # There are 2 environments and 2 environment secrets
+          expect(subject.environment_keys.count).to eq(4 * 2) # There are 4 environments and 2 environment secrets
         end
 
         it "should have all keys with a prefix of the environment secret name" do
