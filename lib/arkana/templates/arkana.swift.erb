@@ -19,6 +19,11 @@ public enum <%= @namespace %> {
             element ^ cipher[offset % cipher.count]
         }, as: UTF8.self)
     }
+
+    static func decode(encoded: [UInt8], cipher: [UInt8]) -> Bool {
+        let stringValue: String = Self.decode(encoded: encoded, cipher: cipher)
+        return Bool(stringValue)!
+    }
 }
 
 public extension <%= @namespace %> {
