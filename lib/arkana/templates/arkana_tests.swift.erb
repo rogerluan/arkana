@@ -41,4 +41,24 @@ final class <%= @namespace %>Tests: XCTestCase {
         ]
         XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "<%= uuid_key %>")
     }
+
+    func test_decodeTrueBoolValue_shouldDecode() {
+<% bool_key = "true" %>
+<% secret = generate_test_secret(key: bool_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertTrue(<%= @namespace %>.decode(encoded: encoded, cipher: salt))
+    }
+
+    func test_decodeFalseBoolValue_shouldDecode() {
+<% bool_key = "false" %>
+<% secret = generate_test_secret(key: bool_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertFalse(<%= @namespace %>.decode(encoded: encoded, cipher: salt))
+    }
 }

@@ -5,3 +5,8 @@ result_path: 'tests'
 swift_declaration_strategy: lazy var
 should_generate_unit_tests: true
 package_manager: spm
+global_secrets:
+- BoolAsStringTrueKey
+- BoolAsStringFalseKey
+- BoolAsBoolTrueKey
+- BoolAsBoolFalseKey
