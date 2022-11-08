@@ -10,3 +10,5 @@ global_secrets:
 - BoolAsStringFalseKey
 - BoolAsBoolTrueKey
 - BoolAsBoolFalseKey
+- IntAsStringKey
+- IntAsNumberKey

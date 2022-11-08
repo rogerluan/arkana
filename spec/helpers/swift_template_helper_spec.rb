@@ -22,6 +22,14 @@ RSpec.describe SwiftTemplateHelper do
       end
     end
 
+    context "when type is :integer" do
+      let(:type) { :integer }
+
+      it "should be Swift type Int" do
+        expect(subject).to eq "Int"
+      end
+    end
+
     context "when type is unknown" do
       let(:type) { :bananas }
 
