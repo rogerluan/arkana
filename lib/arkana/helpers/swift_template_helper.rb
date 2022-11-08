@@ -6,6 +6,7 @@ module SwiftTemplateHelper
     case type
     when :string then "String"
     when :boolean then "Bool"
+    when :integer then "Int"
     else raise "Unknown variable type '#{type}' received.'"
     end
   end

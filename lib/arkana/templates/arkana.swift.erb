@@ -24,6 +24,11 @@ public enum <%= @namespace %> {
         let stringValue: String = Self.decode(encoded: encoded, cipher: cipher)
         return Bool(stringValue)!
     }
+
+    static func decode(encoded: [UInt8], cipher: [UInt8]) -> Int {
+        let stringValue: String = Self.decode(encoded: encoded, cipher: cipher)
+        return Int(stringValue)!
+    }
 }
 
 public extension <%= @namespace %> {

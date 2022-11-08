@@ -61,4 +61,14 @@ final class <%= @namespace %>Tests: XCTestCase {
         ]
         XCTAssertFalse(<%= @namespace %>.decode(encoded: encoded, cipher: salt))
     }
+
+    func test_decodeIntValue_shouldDecode() {
+<% int_key = "42" %>
+<% secret = generate_test_secret(key: int_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), 42)
+    }
 }
