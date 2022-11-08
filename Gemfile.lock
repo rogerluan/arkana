@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arkana (1.2.0)
+    arkana (1.3.0)
       colorize (~> 0.8)
       dotenv (~> 2.7)
       yaml (~> 0.2)
@@ -13,7 +13,7 @@ GEM
     colorize (0.8.1)
     diff-lcs (1.5.0)
     docile (1.4.0)
-    dotenv (2.7.6)
+    dotenv (2.8.1)
     json (2.6.2)
     parallel (1.22.1)
     parser (3.1.2.0)
