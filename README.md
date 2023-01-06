@@ -99,7 +99,17 @@ Arkana only has one command, which parses your config file and env vars, generat
 
 Once the Arkana has been run, you need to add it to your codebase:
 
-**Via Swift Package Manager:** add `ArkanaKeys` (or the `import_name` option that you passed in your config file) to your list of dependencies in your `Package.swift` file, like this:
+## Via Swift Package Manager
+If you have set `package_manager` to `spm` which is the default value, Arkana will generate the files in a SwiftPM package.
+You can add this package in an Xcode project or as a dependency of another SwiftPM package.
+
+### Xcode
+1. Choose “File > Add Packages…” then click “Add Local…” then locate and select the `ArkanaKeys` folder (or the `import_name` option that you passed in your config file).
+1. Select your project in the Project navigator, then select your app target and navigate to its General pane.
+1. Click the + button in the “Frameworks, Libraries, and Embedded Content” section, select the local package’s library product, and add it as a dependency.
+
+### As a dependency of another SwiftPM package
+add `ArkanaKeys` (or the `import_name` option that you passed in your config file) to your list of dependencies in your `Package.swift` file, like this:
 
 ```swift
 …
@@ -111,7 +121,8 @@ dependencies: [
 …
 ```
 
-**Via CocoaPods:** add `ArkanaKeys` and `ArkanaKeysInterfaces` (or the `pod_name` option that you passed in your config file) to your list of dependencies in your `Podfile` file, like this:
+## Via CocoaPods
+Add `ArkanaKeys` and `ArkanaKeysInterfaces` (or the `pod_name` option that you passed in your config file) to your list of dependencies in your `Podfile` file, like this:
 
 ```ruby
 pod "ArkanaKeys", path: "path/to/your/dependencies/ArkanaKeys"
@@ -122,7 +133,7 @@ After adding its dependency, you should be able to `import ArkanaKeys` (or the `
 
 We recommend you to add your ArkanaKeys directory to your `.gitignore` since it's an auto-generated code that will change every time you run Arkana (since its salt gets generated on each run). For more information, see [How does it work?](#how-does-it-work)
 
-## Options
+# Options
 
 ### `--help`
 
