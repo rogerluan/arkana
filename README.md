@@ -80,7 +80,7 @@ gem install arkana
 
 # Usage
 
-Arkana requires the declaration of a YAML config file, named e.g. `.arkana.yml`. See [template.yml](/template.yml) for practical examples.
+Arkana requires the declaration of a YAML config file. Although you can name it whatever, the convention is to name it `.arkana.yml`. See [template.yml](/template.yml) for practical examples.
 
 Once you have create your config file, you can run Arkana:
 
@@ -97,19 +97,25 @@ Note that you have to prepend `bundle exec` before `arkana` if you manage your d
 
 Arkana only has one command, which parses your config file and env vars, generating all the code needed. Arkana should always be run before attempting to build your project, to make sure the files exist _and_ are up-to-date (according to the current config file). This means you might need to add the Arkana run command in your CI/CD scripts, _fastlane_, Xcode Build Phases, or something similar.
 
-Once the Arkana has been run, you need to add it to your codebase:
+## Importing Arkana into your project
 
-## Via Swift Package Manager
-If you have set `package_manager` to `spm` which is the default value, Arkana will generate the files in a SwiftPM package.
-You can add this package in an Xcode project or as a dependency of another SwiftPM package.
+Once the Arkana has been run, its files will be created according to the `package_manager` setting defined in your config file, so update that setting according to your project needs.
 
-### Xcode
-1. Choose “File > Add Packages…” then click “Add Local…” then locate and select the `ArkanaKeys` folder (or the `import_name` option that you passed in your config file).
+### Via Swift Package Manager
+
+If you're integrating Arkana via SPM (`package_manager` is set to `spm`), Arkana will generate its files as a local Swift Package.
+
+You can add this package in an Xcode project or as a dependency of another Swift Package:
+
+#### Adding a local Swift Package to your Xcode project
+
+1. Choose <kbd>File</kbd> → <kbd>Add Packages…</kbd> and click on <kbd>Add Local…</kbd>. Locate and select the `ArkanaKeys` folder (or the name of the `import_name` option that you passed in your config file).
 1. Select your project in the Project navigator, then select your app target and navigate to its General pane.
-1. Click the + button in the “Frameworks, Libraries, and Embedded Content” section, select the local package’s library product, and add it as a dependency.
+1. Click the <kbd>+</kbd> button in the `Frameworks, Libraries, and Embedded Content` section, select the local package’s library product, and add it as a dependency.
 
-### As a dependency of another SwiftPM package
-add `ArkanaKeys` (or the `import_name` option that you passed in your config file) to your list of dependencies in your `Package.swift` file, like this:
+#### Adding a local Swift Package to another Swift Package
+
+Add `ArkanaKeys` (or the name of the `import_name` option that you passed in your config file) to your list of dependencies in your `Package.swift` file, like this:
 
 ```swift
 …
@@ -121,7 +127,10 @@ dependencies: [
 …
 ```
 
-## Via CocoaPods
+### Via CocoaPods
+
+If you're integrating Arkana via CocoaPods (`package_manager` is set to `cocoapods`), Arkana will generate its files as a Development Pod.
+
 Add `ArkanaKeys` and `ArkanaKeysInterfaces` (or the `pod_name` option that you passed in your config file) to your list of dependencies in your `Podfile` file, like this:
 
 ```ruby
@@ -133,7 +142,7 @@ After adding its dependency, you should be able to `import ArkanaKeys` (or the `
 
 We recommend you to add your ArkanaKeys directory to your `.gitignore` since it's an auto-generated code that will change every time you run Arkana (since its salt gets generated on each run). For more information, see [How does it work?](#how-does-it-work)
 
-# Options
+## Options
 
 ### `--help`
 
