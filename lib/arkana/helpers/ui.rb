@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require "logger"
-require "colorize"
+require "rainbow/refinement"
+using Rainbow
 
 # Contains utilities related to display information to the user on the Terminal (the user's interface).
 module UI
