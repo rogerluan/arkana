@@ -20,8 +20,8 @@ Gem::Specification.new do |spec|
   spec.executables = ["arkana"]
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "rainbow", "~> 3.1.1"
   spec.add_dependency "dotenv", "~> 2.7"
+  spec.add_dependency "rainbow", "~> 3.1.1"
   spec.add_dependency "yaml", "~> 0.2"
 
   # For more information and examples about making a new gem, check out our guide at: https://bundler.io/guides/creating_gem.html
