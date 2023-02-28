@@ -297,6 +297,10 @@ This project is intended to be a safe, welcoming space for collaboration, and co
 
 For a list of issues worth tackling check out: https://github.com/rogerluan/arkana/issues
 
+# Popularity
+
+[![Star History Chart](https://api.star-history.com/svg?repos=rogerluan/arkana&type=Date)](https://star-history.com/#rogerluan/arkana&Date)
+
 # License
 
 This project is open source and covered by a standard 2-clause BSD license. That means you can use (publicly, commercially and privately), modify and distribute this project's content, as long as you mention **Roger Oba** as the original author of this code and reproduce the LICENSE text inside your app, repository, project or research paper.
