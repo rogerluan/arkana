@@ -222,6 +222,27 @@ However, when it came to monorepo structures, we weighted the pros and cons of b
 
 If you have questions on how to set this up, feel free to open an issue and we can clarify further how this can be set up.
 
+## Usage of env vars with Dollar Sign
+
+This project is implemented in Ruby and uses the [`dotfiles`](https://github.com/bkeepers/dotenv) gem. Since `dotfiles` [follows bash implementation as close as possible](https://github.com/bkeepers/dotenv/issues/214), dollar signs (`$`) need to be escaped unless they are in single quotes.
+
+For example, these are all valid:
+
+```ruby
+SecretWithDollarSignEscapedAndAndNoQuotesKey = real_\$lim_shady
+SecretWithDollarSignEscapedAndDoubleQuoteKey = "real_\$lim_shady"
+SecretWithDollarSignNotEscapedAndSingleQuoteKey = 'real_$lim_shady'
+```
+
+These are not valid:
+
+```ruby
+SecretWithDollarSignNotEscapedAndDoubleQuotesKey = "real_$lim_shady"
+SecretWithDollarSignNotEscapedAndNoQuotesKey = real_$lim_shady
+```
+
+When storing your secret in actual env vars (instead of dotfiles), you will most likely need to escape them too.
+
 # FAQ
 
 ## How does it work?
