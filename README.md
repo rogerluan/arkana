@@ -222,7 +222,7 @@ However, when it came to monorepo structures, we weighted the pros and cons of b
 
 If you have questions on how to set this up, feel free to open an issue and we can clarify further how this can be set up.
 
-## Presence of weird characters in your env vars
+## Presence of special characters in your env vars
 
 ### Dollar Sign
 
@@ -250,7 +250,7 @@ When storing your secret in actual env vars (instead of dotfiles), you will most
 - `\` aka backslash: double scaping will be needed
 - `"` aka double quotes: escaping is needed
 
-### Other common weird characters that are fine to be used
+### Other common special characters that are fine to be used
 
 ```txt
 ` ~ ! @ # % ^ & * ( ) _ - + = { [ } } | : ; ' < , > . ? /
