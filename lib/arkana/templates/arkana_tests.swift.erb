@@ -115,4 +115,8 @@ final class <%= @namespace %>Tests: XCTestCase {
     func test_decodeEnvVarFromDotfile_withDollarSign__andNotEscaped_andNoQuotes_shouldDecodeWithUnexpectedValue() {
         XCTAssertNotEqual(globalSecrets.secretWithDollarSignNotEscapedAndNoQuotesKey, "real_$lim_shady")
     }
+
+    func test_decodeEnvVarFromDotfile_withWeirdCharacters_shouldDecode() {
+        XCTAssertEqual(globalSecrets.secretWithWeirdCharactersKey, "` ~ ! @ # % ^ & * ( ) _ - + = { [ } } | : ; ' < , > . ? /")
+    }
 }
