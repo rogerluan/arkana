@@ -186,7 +186,7 @@ This will change the env var lookup method, to this particular order:
 
 This means that, if you are working with a white-label project, you can have all your env vars declared in a single `.env` file, or in multiple files like `.env.snowflakes`, `.env.frosties`, etc. This also means that your CI can be configured with the appropriate env vars e.g. `SnowflakesMySecretAPIKey`, `FrostiesMySecretAPIKey`, etc, with no necessity to manage (or git-version) dotenv files at all, which is the ideal way to manage secrets securely in a project.
 
-# Advanced Usage
+# Advanced usage
 
 ## Continuous Integration
 
@@ -224,9 +224,9 @@ If you have questions on how to set this up, feel free to open an issue and we c
 
 ## Presence of special characters in your env vars
 
-### Dollar Sign
+### Dollar sign
 
-This project is implemented in Ruby and uses the [`dotfiles`](https://github.com/bkeepers/dotenv) gem. Since `dotfiles` [follows bash implementation as close as possible](https://github.com/bkeepers/dotenv/issues/214), dollar signs (`$`) need to be escaped unless they are in single quotes.
+This project is implemented in Ruby and uses the [`dotenv`](https://github.com/bkeepers/dotenv) gem. Since `dotenv` [follows bash implementation as close as possible](https://github.com/bkeepers/dotenv/issues/214), dollar signs (`$`) need to be escaped unless they are in single quotes.
 
 For example, these are all valid:
 
