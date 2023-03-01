@@ -12,3 +12,9 @@ global_secrets:
 - BoolAsBoolFalseKey
 - IntAsStringKey
 - IntAsNumberKey
+- SecretWithDollarSignEscapedAndAndNoQuotesKey
+- SecretWithDollarSignEscapedAndDoubleQuoteKey
+- SecretWithDollarSignNotEscapedAndSingleQuoteKey
+- SecretWithDollarSignNotEscapedAndDoubleQuotesKey
+- SecretWithDollarSignNotEscapedAndNoQuotesKey
+- SecretWithWeirdCharactersKey

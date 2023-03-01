@@ -186,7 +186,7 @@ This will change the env var lookup method, to this particular order:
 
 This means that, if you are working with a white-label project, you can have all your env vars declared in a single `.env` file, or in multiple files like `.env.snowflakes`, `.env.frosties`, etc. This also means that your CI can be configured with the appropriate env vars e.g. `SnowflakesMySecretAPIKey`, `FrostiesMySecretAPIKey`, etc, with no necessity to manage (or git-version) dotenv files at all, which is the ideal way to manage secrets securely in a project.
 
-# Advanced Usage
+# Advanced usage
 
 ## Continuous Integration
 
@@ -221,6 +221,40 @@ However, when it came to monorepo structures, we weighted the pros and cons of b
 - the complexity of maintaining a centralized configuration file that manages all projects would be too high to be implemented in Arkana. We aim for simplicity.
 
 If you have questions on how to set this up, feel free to open an issue and we can clarify further how this can be set up.
+
+## Presence of special characters in your env vars
+
+### Dollar sign
+
+This project is implemented in Ruby and uses the [`dotenv`](https://github.com/bkeepers/dotenv) gem. Since `dotenv` [follows bash implementation as close as possible](https://github.com/bkeepers/dotenv/issues/214), dollar signs (`$`) need to be escaped unless they are in single quotes.
+
+For example, these are all valid:
+
+```ruby
+SecretWithDollarSignEscapedAndAndNoQuotesKey = real_\$lim_shady
+SecretWithDollarSignEscapedAndDoubleQuoteKey = "real_\$lim_shady"
+SecretWithDollarSignNotEscapedAndSingleQuoteKey = 'real_$lim_shady'
+```
+
+These are not valid:
+
+```ruby
+SecretWithDollarSignNotEscapedAndDoubleQuotesKey = "real_$lim_shady"
+SecretWithDollarSignNotEscapedAndNoQuotesKey = real_$lim_shady
+```
+
+When storing your secret in actual env vars (instead of dotfiles), you will most likely need to escape them too.
+
+### Other characters to avoid
+
+- `\` aka backslash: double scaping will be needed
+- `"` aka double quotes: escaping is needed
+
+### Other common special characters that are fine to be used
+
+```txt
+` ~ ! @ # % ^ & * ( ) _ - + = { [ } } | : ; ' < , > . ? /
+```
 
 # FAQ
 
