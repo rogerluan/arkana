@@ -333,7 +333,7 @@ For a list of issues worth tackling check out: https://github.com/rogerluan/arka
 
 # Popularity
 
-[![Star History Chart](https://api.star-history.com/svg?repos=rogerluan/arkana&type=Date)](https://star-history.com/#rogerluan/arkana&Date)
+<img width=500 src="https://api.star-history.com/svg?repos=rogerluan/arkana&type=Date">
 
 # License
 
