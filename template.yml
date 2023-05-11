@@ -7,6 +7,7 @@ flavors: # Optional. Flavors are keywords added as a prefix to every secret when
   - FrootLoops
 swift_declaration_strategy: let # Optional. One of: lazy var, var, let. Defaults to let.
 should_generate_unit_tests: true # Optional. One of: true, false. Defaults to true.
+should_cross_import_modules: true # Optional. If false, the two generated modules does not cross import (for manual import). One of: true, false. Defaults to true.
 package_manager: cocoapods # Optional. This setting defines which type of dependency management you're going ot use to integrate Arkana into your project. One of: spm, cocoapods. If you use both in your project, use cocoapods here. Defaults to spm.
 environments: # Optional. List of environments that will be used to generate secret keys when you have keys that are different between environments (e.g. debug/staging/prod). Defaults to empty.
   - Debug

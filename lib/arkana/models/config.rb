@@ -24,6 +24,8 @@ class Config
   attr_reader :should_generate_unit_tests
   # @returns [string]
   attr_reader :package_manager
+  # @returns [boolean]
+  attr_reader :should_cross_import_modules
 
   # @returns [string]
   attr_accessor :current_flavor
@@ -45,6 +47,8 @@ class Config
     @should_generate_unit_tests = yaml["should_generate_unit_tests"]
     @should_generate_unit_tests = true if @should_generate_unit_tests.nil?
     @package_manager = yaml["package_manager"] || "spm"
+    @should_cross_import_modules = yaml["should_cross_import_modules"]
+    @should_cross_import_modules = true if @should_cross_import_modules.nil?
   end
   # rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
