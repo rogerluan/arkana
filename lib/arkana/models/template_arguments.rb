@@ -24,8 +24,8 @@ class TemplateArguments
     @swift_declaration_strategy = config.swift_declaration_strategy
     # Whether unit tests should be generated.
     @should_generate_unit_tests = config.should_generate_unit_tests
-    # Whether modules should cross import.
-    @should_cross_import_modules = config.should_cross_import_modules
+    # Whether cocoapods modules should cross import.
+    @should_cocoapods_cross_import_modules = config.should_cocoapods_cross_import_modules
   end
 
   def environment_protocol_secrets(environment)
