@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.license = "BSD-2-Clause"
   spec.summary = "Store your keys and secrets away from your source code. Designed for Android and iOS projects."
   spec.homepage = "https://github.com/rogerluan/arkana"
-  spec.required_ruby_version = ">= 2.6.9"
+  spec.required_ruby_version = ">= 2.7"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/rogerluan/arkana"
