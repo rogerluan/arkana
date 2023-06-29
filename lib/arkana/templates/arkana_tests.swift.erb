@@ -95,6 +95,7 @@ final class <%= @namespace %>Tests: XCTestCase {
         ]
         XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "real_$lim_shady")
     }
+<% if ENV["ARKANA_RUNNING_CI_INTEGRATION_TESTS"] %>
 
     func test_decodeEnvVarFromDotfile_withDollarSign__andEscaped_andNoQuotes_shouldDecode() {
         XCTAssertEqual(globalSecrets.secretWithDollarSignEscapedAndAndNoQuotesKey, "real_$lim_shady")
@@ -119,4 +120,5 @@ final class <%= @namespace %>Tests: XCTestCase {
     func test_decodeEnvVarFromDotfile_withWeirdCharacters_shouldDecode() {
         XCTAssertEqual(globalSecrets.secretWithWeirdCharactersKey, "` ~ ! @ # % ^ & * ( ) _ - + = { [ } } | : ; ' < , > . ? /")
     }
+<% end %>
 }

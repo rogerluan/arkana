@@ -34,6 +34,7 @@ RSpec.describe SwiftCodeGenerator do
     config.all_keys.each do |key|
       allow(ENV).to receive(:[]).with(key).and_return("value")
     end
+    allow(ENV).to receive(:[]).with("ARKANA_RUNNING_CI_INTEGRATION_TESTS").and_return(true)
   end
 
   after { FileUtils.rm_rf(config.result_path) }
