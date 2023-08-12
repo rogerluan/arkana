@@ -24,6 +24,7 @@
   <a href="https://twitter.com/intent/follow?screen_name=rogerluan_">
     <img src="https://img.shields.io/twitter/follow/rogerluan_?&logo=twitter" alt="Follow on Twitter">
   </a>
+  <img src="https://views.whatilearened.today/views/github/rogerluan/arkana.svg">
 
   <p align="center">
     <a href="#preview">View Demo</a>
