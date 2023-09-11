@@ -336,6 +336,14 @@ For a list of issues worth tackling check out: https://github.com/rogerluan/arka
 
 <img width=500 src="https://api.star-history.com/svg?repos=rogerluan/arkana&type=Date">
 
+# Explore my other tools
+
+<img width="400" alt="Statused Social Banner" src="https://statused.com/assets/social-banner.png">
+
+Forget about 'When did release v2.1.3 go live again?' and 'Is the app ready to be tested yet?'
+
+Statused monitors App Store Connect and send you notifications directly on Slack. Learn more: [statused.com](https://statused.com?ref=arkana)
+
 # License
 
 This project is open source and covered by a standard 2-clause BSD license. That means you can use (publicly, commercially and privately), modify and distribute this project's content, as long as you mention **Roger Oba** as the original author of this code and reproduce the LICENSE text inside your app, repository, project or research paper.
