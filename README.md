@@ -342,7 +342,9 @@ For a list of issues worth tackling check out: https://github.com/rogerluan/arka
 
 Forget about 'When did release v2.1.3 go live again?' and 'Is the app ready to be tested yet?'
 
-Statused monitors App Store Connect and send you notifications directly on Slack. Learn more: [statused.com](https://statused.com?ref=arkana)
+Statused monitors App Store Connect and send you notifications directly on Slack.
+
+Learn more: [statused.com](https://statused.com?ref=arkana)
 
 # License
 
