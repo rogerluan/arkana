@@ -51,7 +51,8 @@ RSpec.describe SwiftCodeGenerator do
     def path(arg1, arg2, arg3 = nil)
       arg1and2 = File.join(arg1, arg2)
       return Pathname.new(arg1and2) unless arg3
-      return Pathname.new(File.join(arg1and2, arg3)) if arg3
+
+      Pathname.new(File.join(arg1and2, arg3)) if arg3
     end
 
     it "should generate all necessary directories and files" do
