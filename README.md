@@ -111,8 +111,10 @@ You can add this package in an Xcode project or as a dependency of another Swift
 #### Adding a local Swift Package to your Xcode project
 
 1. Choose <kbd>File</kbd> → <kbd>Add Packages…</kbd> and click on <kbd>Add Local…</kbd>. Locate and select the `ArkanaKeys` folder (or the name of the `import_name` option that you passed in your config file).
+    - If you happen to have 2 nested folders with the same name `ArkanaKeys`, select the inner one.
 1. Select your project in the Project navigator, then select your app target and navigate to its General pane.
 1. Click the <kbd>+</kbd> button in the `Frameworks, Libraries, and Embedded Content` section, select the local package’s library product, and add it as a dependency.
+    - You may need to quit Xcode and re-open the project for the new dependency to be recognized. Classic Xcode fashion.
 
 #### Adding a local Swift Package to another Swift Package
 
