@@ -5,11 +5,12 @@ RSpec.describe Arkana do
     let(:config_filepath) { "spec/fixtures/arkana-fixture.yml" }
     let(:arguments) { Arguments.new }
     let(:config) { ConfigParser.parse(arguments) }
+
     before { ARGV.replace(["--config-filepath", config_filepath]) }
 
     context "when one or more env vars are missing" do
-      it "should raise error" do
-        expect { Arkana.run(arguments) }.to raise_error(/Secret '(?:.*)' was declared but couldn't be found in the environment variables nor in the specified dotenv file./)
+      it "raises error" do
+        expect { described_class.run(arguments) }.to raise_error(/Secret '(?:.*)' was declared but couldn't be found in the environment variables nor in the specified dotenv file./)
       end
     end
 
@@ -20,9 +21,9 @@ RSpec.describe Arkana do
         end
       end
 
-      it "should call SwiftCodeGenerator.generate" do
+      it "calls SwiftCodeGenerator.generate" do
         expect(SwiftCodeGenerator).to receive(:generate)
-        Arkana.run(arguments)
+        described_class.run(arguments)
       end
     end
 
