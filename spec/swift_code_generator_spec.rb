@@ -55,8 +55,8 @@ RSpec.describe SwiftCodeGenerator do
       Pathname.new(File.join(arg1and2, arg3)) if arg3
     end
 
-    it "should generate all necessary directories and files" do
-      SwiftCodeGenerator.generate(template_arguments: template_arguments, config: config)
+    it "generates all necessary directories and files" do
+      described_class.generate(template_arguments: template_arguments, config: config)
       expect(Pathname.new(config.result_path)).to be_directory
       expect(path(swift_package_dir, "README.md")).to be_file
       expect(path(swift_package_dir, "Package.swift")).to be_file
@@ -67,27 +67,27 @@ RSpec.describe SwiftCodeGenerator do
     end
 
     context "when 'config.package_manager'" do
-      context "is 'cocoapods'" do
+      context "when is 'cocoapods'" do
         before do
           allow(config).to receive(:package_manager).and_return("cocoapods")
-          SwiftCodeGenerator.generate(template_arguments: template_arguments, config: config)
+          described_class.generate(template_arguments: template_arguments, config: config)
         end
 
-        it "should generate podspec files" do
+        it "generates podspec files" do
           expect(path(swift_package_dir, "#{config.pod_name.capitalize_first_letter}.podspec")).to be_file
           expect(path(interface_swift_package_dir, "#{config.pod_name.capitalize_first_letter}Interfaces.podspec")).to be_file
         end
       end
 
-      context "is not 'cocoapods'" do
+      context "when is not 'cocoapods'" do
         before do
           allow(config).to receive(:package_manager).and_return("spm")
-          SwiftCodeGenerator.generate(template_arguments: template_arguments, config: config)
+          described_class.generate(template_arguments: template_arguments, config: config)
         end
 
-        it "should not generate podspec files" do
-          expect(path(swift_package_dir, "#{config.pod_name.capitalize_first_letter}.podspec")).to_not be_file
-          expect(path(interface_swift_package_dir, "#{config.pod_name.capitalize_first_letter}Interfaces.podspec")).to_not be_file
+        it "does not generate podspec files" do
+          expect(path(swift_package_dir, "#{config.pod_name.capitalize_first_letter}.podspec")).not_to be_file
+          expect(path(interface_swift_package_dir, "#{config.pod_name.capitalize_first_letter}Interfaces.podspec")).not_to be_file
         end
       end
     end
@@ -95,14 +95,14 @@ RSpec.describe SwiftCodeGenerator do
     context "when 'config.should_generate_unit_tests' is true" do
       before do
         allow(config).to receive(:should_generate_unit_tests).and_return(true)
-        SwiftCodeGenerator.generate(template_arguments: template_arguments, config: config)
+        described_class.generate(template_arguments: template_arguments, config: config)
       end
 
-      it "should generate test folder and files" do
+      it "generates test folder and files" do
         expect(path(swift_package_dir, "Tests", "#{config.import_name}Tests.swift")).to be_file
       end
 
-      it "should contain '.testTarget(' in Package.swift" do
+      it "contains '.testTarget(' in Package.swift" do
         expect(File.read(path(swift_package_dir, "Package.swift"))).to match(/\.testTarget\(/)
       end
     end
@@ -110,16 +110,16 @@ RSpec.describe SwiftCodeGenerator do
     context "when 'config.should_generate_unit_tests' is false" do
       before do
         allow(config).to receive(:should_generate_unit_tests).and_return(false)
-        SwiftCodeGenerator.generate(template_arguments: template_arguments, config: config)
+        described_class.generate(template_arguments: template_arguments, config: config)
       end
 
-      it "should not generate test folder or files" do
-        expect(path(swift_package_dir, "Tests", "#{config.import_name}Tests.swift")).to_not be_file
-        expect(path(swift_package_dir, "Tests")).to_not be_directory
+      it "does not generate test folder or files" do
+        expect(path(swift_package_dir, "Tests", "#{config.import_name}Tests.swift")).not_to be_file
+        expect(path(swift_package_dir, "Tests")).not_to be_directory
       end
 
-      it "should not contain '.testTarget(' in Package.swift" do
-        expect(File.read(path(swift_package_dir, "Package.swift"))).to_not match(/\.testTarget\(/)
+      it "does not contain '.testTarget(' in Package.swift" do
+        expect(File.read(path(swift_package_dir, "Package.swift"))).not_to match(/\.testTarget\(/)
       end
     end
   end

@@ -2,14 +2,14 @@
 
 RSpec.describe SaltGenerator do
   describe ".generate" do
-    subject { SaltGenerator.generate }
+    subject { described_class.generate }
 
     describe "#raw" do
-      it "should return an array of integers" do
-        expect(subject.raw).to all(be_kind_of(Integer))
+      it "returns an array of integers" do
+        expect(subject.raw).to all(be_a(Integer))
       end
 
-      it "should have #{SaltGenerator::SALT_LENGTH} elements" do
+      it "has #{SaltGenerator::SALT_LENGTH} elements" do
         expect(subject.raw.count).to eq SaltGenerator::SALT_LENGTH
       end
     end
