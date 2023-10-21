@@ -44,6 +44,14 @@ RSpec.describe Config do
         expect(subject.dotenv_filepath).to be_nil
       end
     end
+
+    context "when all_keys is empty" do
+      subject { Config.new({}) }
+
+      it "should raise an error" do
+        expect { SwiftCodeGenerator.generate(template_arguments: template_arguments, config: config) }.to raise_error(StandardError)
+      end
+    end
   end
 
   describe `#environment_keys` do
@@ -78,6 +86,43 @@ RSpec.describe Config do
             subject.environments.any? { |env| key.end_with?(env) }
           end).to be_truthy
         end
+      end
+    end
+  end
+
+  describe ".include_environments" do
+    context "when nil is passed" do
+      it "should include all environments declared in the yaml file" do
+        subject.include_environments(nil)
+        expect(subject.environments).to match_array %w[Debug Release DebugPlusMore ReleasePlusMore]
+      end
+    end
+
+    context "when 1 environment is passed" do
+      it "should only that environment in the environments" do
+        subject.include_environments(["DebugPlusMore"])
+        expect(subject.environments).to match_array %w[DebugPlusMore]
+      end
+    end
+
+    context "when all environments are passed" do
+      it "should only that environment in the environments" do
+        subject.include_environments(%w[Debug Release DebugPlusMore ReleasePlusMore])
+        expect(subject.environments).to match_array %w[Debug Release DebugPlusMore ReleasePlusMore]
+      end
+    end
+
+    context "when an empty array is passed" do
+      it "should cause the subject's environments to become empty" do
+        subject.include_environments([])
+        expect(subject.environments).to be_empty
+      end
+    end
+
+    context "when a string that is not an environment is passed" do
+      it "should ignore that string and consider the other elements of the array passed, if any" do
+        subject.include_environments(["I double dare you"])
+        expect(subject.environments).to be_empty
       end
     end
   end

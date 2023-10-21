@@ -18,3 +18,10 @@ global_secrets:
 - SecretWithDollarSignNotEscapedAndDoubleQuotesKey
 - SecretWithDollarSignNotEscapedAndNoQuotesKey
 - SecretWithWeirdCharactersKey
+environments:
+  - dev
+  - staging
+  - prod
+environment_secrets:
+  - ServiceKey
+  - Server
