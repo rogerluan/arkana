@@ -1,46 +1,204 @@
-AllCops:
-  TargetRubyVersion: 2.7
-  NewCops: enable
+inherit_from: .rubocop_todo.yml
 
+# Last reviewed on Aug 31st 2023, using RuboCop v1.56.1
+
+require:
+  - rubocop-rake
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Max: 9
+
+Metrics/CyclomaticComplexity:
+  Max: 9
+
+# Our displays are wide enough. IDEs are configured to linebreak beautifully when needed :) we trust common sense here.
+Layout/LineLength:
+  Enabled: false
+
+# Enforce that all string literals must use double quotes. This ensures real consistency.
+# https://www.viget.com/articles/just-use-double-quoted-ruby-strings/
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
-
 Style/StringLiteralsInInterpolation:
   Enabled: true
   EnforcedStyle: double_quotes
 
+# Multiline literals and method calls should always have a trailing comma as that makes diffs less noisy.
+# https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInArguments:
+  Enabled: true
+  EnforcedStyleForMultiline: consistent_comma
+
+# Allows to write case/when/end statements like:
+#   long_variable_name = case x
+#     when "a" then 1
+#     when "b" then 2
+#   end
+# Instead of having to indent it near the the case statement which looks weird.
+Layout/CaseIndentation:
+  EnforcedStyle: end
+  IndentOneStep: true
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: start_of_line
+
+# The default style is `special_inside_parentheses` which looks like:
+#
+#     this_is_a_method_call({
+#                        some_key: "value",
+#                      })
+#
+# This would cause an unnecessary huge diff if `in_a_method_call` is renamed,
+# because all following lines need to be re-indented. That's why we prefer
+# the layout like this:
+#
+#     this_is_a_method_call({
+#       some_key: "value",
+#     })
+#
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+# Make sure gems are always alphabetically ordered.
+Bundler/OrderedGems:
+  Enabled: true
+
+# Emojis are fun, guys. Let's use them! 🚀 (also, special characters such as "→" are way better than e.g. "->")
+Style/AsciiComments:
   Enabled: false
 
+# Lengthy blocks shouldn't be an issue in rspec…
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+# Prefer word array literals using %w[] syntax
+# https://stackoverflow.com/a/1274703/4075379
 Style/WordArray:
   Enabled: true
   EnforcedStyle: percent
 
-Layout/LineLength:
+# https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/Next
+Style/Next:
+  Enabled: true
+  EnforcedStyle: skip_modifier_ifs
+
+# https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/GuardClause
+Style/GuardClause:
+  Enabled: true
+
+# Check for if and case statements where each branch is used for assignment to the same variable when using the return of the condition can be used instead.
+Style/ConditionalAssignment:
+  Enabled: true
+  EnforcedStyle: assign_to_condition
+
+# Long positional parameter lists make it hard to reason about the code, but named arguments are easier to follow, so we allow them.
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+# We leave this one up to the developer's best judgement. For this to work well, we'd need to enable Layout/LineLength,
+# which we don't want to because it would affect other areas of the codebase.
+# https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Style/IfUnlessModifier
+Style/IfUnlessModifier:
   Enabled: false
 
-Style/FetchEnvVar:
+# Aligning hash keys is important :)
+# https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Layout/HashAlignment
+Layout/HashAlignment:
+  Enabled: true
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key
+  EnforcedLastArgumentHashStyle: always_inspect
+
+# This extra empty line is not needed.
+Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
-Metrics/PerceivedComplexity:
-  Max: 6
+# Ensures that each key, element, parameter, and argument in a multiline hash start on a separate line.
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+Layout/MultilineMethodParameterLineBreaks:
+  Enabled: true
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
 
-Metrics/CyclomaticComplexity:
-  Max: 7
+# Ensures a line break before the first element in a multiline hash, array, parameter, and argument.
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+Layout/FirstMethodParameterLineBreak:
+  Enabled: true
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: false # Except this one because sometimes it makes code more complex to read than it should be.
 
-Metrics/BlockLength:
-  IgnoredMethods:
-   - 'describe'
-   - 'context'
+# Helpful to make large numbers more readable.
+Style/NumericLiterals:
+  Enabled: true
+  Exclude:
+    - 'db/schema.rb' # Don't format the magic date-like numbers generated by Rails.
 
+# Most of these are more complicated to read & write than simply writing the conventional way.
+Style/SymbolArray:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+# Omitting the hash value makes the code look too obscure. Not great for newcomers who are not used to this.
+Style/HashSyntax:
+  Enabled: false
+
+# If it's redundant, let's get rid of the block as it's more noisy.
+Style/RedundantFetchBlock:
+  Enabled: true
+
+# Use $stdout instead of STDOUT.
+Style/GlobalStdStream:
+  Enabled: true
+
+# Prefer Api::V1::MyController instead of nested and indented modules
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# This one measures "Assignment Branch Condition size". It's annoying and not helpful at all.
 Metrics/AbcSize:
   Enabled: false
 
+# Don't enforce documentation. Trust common sense here.
 Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
+  Enabled: false
 
-Metrics/MethodLength:
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/NestedGroups:
   Enabled: false
