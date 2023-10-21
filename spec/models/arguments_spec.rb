@@ -75,7 +75,7 @@ RSpec.describe Arguments do
     end
 
     context "when the option is passed in ARGV" do
-      let(:expected_environments) { ["first_env", "second_env"] }
+      let(:expected_environments) { %w[first_env second_env] }
       before { ARGV.replace(["--include-environments", expected_environments.join(",")]) }
 
       it "should return the environments passed as an array, not as a comma-separated string" do

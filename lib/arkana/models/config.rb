@@ -66,6 +66,7 @@ class Config
 
   def include_environments(environments)
     return unless environments
+
     @environments = @environments.select { |e| environments.map(&:downcase).include?(e.downcase) }
   end
 end
