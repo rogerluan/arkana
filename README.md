@@ -171,6 +171,14 @@ Usage: `--flavor loremipsum`
 
 Passing a flavor option will change the env var lookup mechanism. Flavors are useful, for instance, when generating secrets for white-label projects.
 
+### `--include-environments`
+
+Usage: `--include-environments dev,staging,prod`
+
+Passing an `--include-environments` option will change the env var lookup mechanism. This option is useful when you want to generate secrets for specific environments only, and skip the verification that checks whether all keys from all environments are present. You might want to use this option to only build debug environments locally (and thus only require debug env vars), and only build staging and production environments in CI (and thus only expose prod env vars to your CI).
+
+Defaults to `nil`, which means all your environments will be used. When passing multiple values, separate them with commas and no spaces.
+
 #### Example
 
 Let's load a flavor called `snowflakes` and load a secret called `MySecretAPIKey`:
