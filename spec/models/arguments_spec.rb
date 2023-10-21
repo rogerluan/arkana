@@ -73,16 +73,17 @@ RSpec.describe Arguments do
 
   describe "#environments" do
     context "when the option is ommitted in ARGV" do
-      it "should default to nil" do
+      it "defaults to nil" do
         expect(subject.include_environments).to be_nil
       end
     end
 
     context "when the option is passed in ARGV" do
       let(:expected_environments) { %w[first_env second_env] }
+
       before { ARGV.replace(["--include-environments", expected_environments.join(",")]) }
 
-      it "should return the environments passed as an array, not as a comma-separated string" do
+      it "returns the environments passed as an array, not as a comma-separated string" do
         expect(subject.include_environments).to eq expected_environments
       end
     end

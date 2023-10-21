@@ -30,8 +30,10 @@ RSpec.describe Arkana do
     context "when only a subset of environments is included" do
       before do
         ARGV.replace([
-          "--config-filepath", config_filepath,
-          "--include-environments", "debug,release,debugPlusMore",
+          "--config-filepath",
+          config_filepath,
+          "--include-environments",
+          "debug,release,debugPlusMore",
         ])
 
         config.all_keys.each do |key|
@@ -41,8 +43,8 @@ RSpec.describe Arkana do
         allow(ENV).to receive(:[]).with("ServerReleasePlusMore").and_return(nil)
       end
 
-      it "should not error out when it cant find a missing env var that wasnt included in the list of environments" do
-        expect { Arkana.run(arguments) }.to_not raise_error
+      it "does not error out when it cant find a missing env var that wasnt included in the list of environments" do
+        expect { described_class.run(arguments) }.not_to raise_error
       end
     end
   end
