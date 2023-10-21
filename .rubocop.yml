@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 # Last reviewed on Aug 31st 2023, using RuboCop v1.56.1
 
 require:
@@ -6,13 +8,13 @@ require:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.2
+  TargetRubyVersion: 2.7
 
 Style/FrozenStringLiteralComment:
   Enabled: true
 
 Metrics/MethodLength:
-  Max: 15
+  Enabled: false
 
 Metrics/PerceivedComplexity:
   Max: 9
@@ -187,4 +189,16 @@ Metrics/AbcSize:
 
 # Don't enforce documentation. Trust common sense here.
 Style/Documentation:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/NestedGroups:
   Enabled: false
