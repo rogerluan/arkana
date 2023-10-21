@@ -3,6 +3,7 @@
 require_relative "arkana/config_parser"
 require_relative "arkana/encoder"
 require_relative "arkana/helpers/dotenv_helper"
+require_relative "arkana/helpers/ui"
 require_relative "arkana/models/template_arguments"
 require_relative "arkana/salt_generator"
 require_relative "arkana/swift_code_generator"
@@ -30,11 +31,11 @@ module Arkana
       )
     rescue StandardError => e
       # TODO: Improve this by creating an Env/Debug helper
-      puts("Something went wrong when parsing and encoding your secrets.")
-      puts("Current Flavor: #{config.current_flavor}")
-      puts("Dotenv Filepath: #{config.dotenv_filepath}")
-      puts("Config Filepath: #{arguments.config_filepath}")
-      raise e
+      UI.warn("Something went wrong when parsing and encoding your secrets.")
+      UI.warn("Current Flavor: #{config.current_flavor}")
+      UI.warn("Dotenv Filepath: #{config.dotenv_filepath}")
+      UI.warn("Config Filepath: #{arguments.config_filepath}")
+      UI.crash(e.message)
     end
     template_arguments = TemplateArguments.new(
       environment_secrets: environment_secrets,
