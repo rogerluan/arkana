@@ -1,5 +1,8 @@
 name: Tests & Linter
-on: push
+on:
+  push:
+    branches:
+      - main
 jobs:
   test:
     env:
