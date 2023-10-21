@@ -14,7 +14,7 @@ task default: %i[spec rubocop]
 
 desc "Generates Swift source code and run its unit tests."
 task :test_swift do
-  sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true bin/arkana --config-filepath spec/fixtures/swift-tests.yml --dotenv-filepath spec/fixtures/.env.fruitloops")
+  sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true bin/arkana --config-filepath spec/fixtures/swift-tests.yml --dotenv-filepath spec/fixtures/.env.fruitloops --include-environments dev,staging")
   Dir.chdir("tests/MySecrets") do
     sh("swift test")
   end
