@@ -16,6 +16,8 @@ class Config
   attr_reader :pod_name
   # @returns [string]
   attr_reader :result_path
+  # @returns [string]
+  attr_reader :package_name
   # @returns [string[]]
   attr_reader :flavors
   # @returns [string]
@@ -31,6 +33,8 @@ class Config
   attr_accessor :current_flavor
   # @returns [string]
   attr_accessor :dotenv_filepath
+  # @returns [string]
+  attr_accessor :current_lang
 
   # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
   def initialize(yaml)
@@ -42,6 +46,7 @@ class Config
     @import_name = yaml["import_name"] || default_name
     @pod_name = yaml["pod_name"] || default_name
     @result_path = yaml["result_path"] || default_name
+    @package_name = yaml["package_name"] || "com.arkanakeys"
     @flavors = yaml["flavors"] || []
     @swift_declaration_strategy = yaml["swift_declaration_strategy"] || "let"
     @should_generate_unit_tests = yaml["should_generate_unit_tests"]

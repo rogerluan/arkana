@@ -14,6 +14,7 @@ module ConfigParser
     config = Config.new(yaml)
     config.include_environments(arguments.include_environments)
     config.current_flavor = arguments.flavor
+    config.current_lang = arguments.lang
     config.dotenv_filepath = arguments.dotenv_filepath
     UI.warn("Dotenv file was specified but couldn't be found at '#{config.dotenv_filepath}'") if config.dotenv_filepath && !File.exist?(config.dotenv_filepath)
     config

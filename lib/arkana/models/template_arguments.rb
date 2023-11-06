@@ -20,6 +20,8 @@ class TemplateArguments
     @pod_name = config.pod_name
     # The top level namespace in which the keys will be generated. Often an enum.
     @namespace = config.namespace
+    # Name of the kotlin package to be used for the generated code.
+    @package_name = config.package_name
     # The property declaration strategy declared in the config file.
     @swift_declaration_strategy = config.swift_declaration_strategy
     # Whether unit tests should be generated.

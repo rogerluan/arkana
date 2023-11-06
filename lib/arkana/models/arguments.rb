@@ -12,6 +12,8 @@ class Arguments
   attr_reader :flavor
   # @returns [Array<string>]
   attr_reader :include_environments
+  # @returns [string]
+  attr_reader :lang
 
   def initialize
     # Default values
@@ -19,6 +21,7 @@ class Arguments
     @dotenv_filepath = ".env" if File.exist?(".env")
     @flavor = nil
     @include_environments = nil
+    @lang = "swift"
 
     OptionParser.new do |opt|
       opt.on("-c", "--config-filepath /path/to/your/.arkana.yml", "Path to your config file. Defaults to '.arkana.yml'") do |o|
@@ -32,6 +35,9 @@ class Arguments
       end
       opt.on("-i", "--include-environments debug,release", "Optionally pass the environments that you want Arkana to generate secrets for. Useful if you only want to build a certain environment, e.g. just Debug in local machines, while only building Staging and Release in CI. Separate the keys using a comma, without spaces. When ommitted, Arkana generate secrets for all environments.") do |o|
         @include_environments = o.split(",")
+      end
+      opt.on("-l", "--lang kotlin", "Language to produce keys for, for e.g. kotlin. See the README for more information") do |o|
+        @lang = o
       end
     end.parse!
   end

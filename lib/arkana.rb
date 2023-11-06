@@ -7,6 +7,7 @@ require_relative "arkana/helpers/ui"
 require_relative "arkana/models/template_arguments"
 require_relative "arkana/salt_generator"
 require_relative "arkana/swift_code_generator"
+require_relative "arkana/kotlin_code_generator"
 require_relative "arkana/version"
 
 # Top-level namespace for Arkana's execution entry point. When ran from CLI, `Arkana.run` is what is invoked.
@@ -43,9 +44,16 @@ module Arkana
       config: config,
       salt: salt,
     )
-    SwiftCodeGenerator.generate(
-      template_arguments: template_arguments,
-      config: config,
-    )
+    if config.current_lang.downcase == "kotlin"
+      KotlinCodeGenerator.generate(
+        template_arguments: template_arguments,
+        config: config,
+      )
+    else
+      SwiftCodeGenerator.generate(
+        template_arguments: template_arguments,
+        config: config,
+      )
+    end
   end
 end

@@ -38,7 +38,7 @@ object <%= @namespace %> {
 <% for environment in @environments %>
     object <%= environment %>: <%= @namespace %>Environment {
 <% for secret in environment_protocol_secrets(environment) %>
-        val <%= secret.protocol_key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %> get() {
+        override val <%= secret.protocol_key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %> get() {
             val encoded = listOf(<%= secret.encoded_value %>)
 
             return <%= KotlinTemplateHelper.kotlin_decode_function(secret.type) %>(encoded = encoded, cipher = salt)
