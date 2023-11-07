@@ -9,8 +9,12 @@ module KotlinCodeGenerator
   # Generates Kotlin code and test files for the given template arguments.
   def self.generate(template_arguments:, config:)
     kotlin_module_dir = config.result_path
-    kotlin_sources_dir = File.join(kotlin_module_dir, "src", "main", "kotlin", config.package_name.split("."))
-    set_up_kotlin_module(kotlin_module_dir, template_arguments)
+    kotlin_sources_dir = File.join(kotlin_module_dir, config.kotlin_sources_path, config.kotlin_package_name.split("."))
+
+    if config.should_generate_gradle_build_file
+      set_up_kotlin_module(kotlin_module_dir, template_arguments)
+    end
+
     set_up_kotlin_interfaces(kotlin_sources_dir, template_arguments, config)
     set_up_kotlin_classes(kotlin_sources_dir, template_arguments, config)
   end
