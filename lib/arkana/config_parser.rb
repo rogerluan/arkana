@@ -12,6 +12,7 @@ module ConfigParser
   def self.parse(arguments)
     yaml = YAML.load_file(arguments.config_filepath)
     config = Config.new(yaml)
+    config.include_environments(arguments.include_environments)
     config.current_flavor = arguments.flavor
     config.dotenv_filepath = arguments.dotenv_filepath
     UI.warn("Dotenv file was specified but couldn't be found at '#{config.dotenv_filepath}'") if config.dotenv_filepath && !File.exist?(config.dotenv_filepath)

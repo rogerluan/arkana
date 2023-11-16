@@ -85,5 +85,24 @@ RSpec.describe ConfigParser do
         end
       end
     end
+
+    describe "#include_environments" do
+      describe "when include_environments is specified" do
+        let(:include_environments) { %w[debug debugPlusMore] }
+
+        before { ARGV << "--include-environments" << include_environments.join(",") }
+
+        it "includes the environments specified, case insensitive" do
+          expect(subject.environments.map(&:downcase)).to match_array(include_environments.map(&:downcase))
+        end
+      end
+
+      describe "when include_environments is not specified" do
+        it "includes all environments" do
+          all_environments = %w[debug release debugPlusMore ReleasePlusMore]
+          expect(subject.environments.map(&:downcase)).to match_array(all_environments.map(&:downcase))
+        end
+      end
+    end
   end
 end
