@@ -27,7 +27,7 @@ RSpec.describe Type do
     end
 
     context "when passing something that looks like a number" do
-      context "it contains leading zeros" do
+      context "when it contains leading zeros" do
         subject { described_class.new(string_value: "0001") }
 
         it "returns :string" do
@@ -35,7 +35,7 @@ RSpec.describe Type do
         end
       end
 
-      context "its string representation is the same as its integer representation" do
+      context "when its string representation is the same as its integer representation" do
         subject { described_class.new(string_value: "1234567890") }
 
         it "returns :integer" do
@@ -43,7 +43,7 @@ RSpec.describe Type do
         end
       end
 
-      context "its string representation is different from its integer representation" do
+      context "when its string representation is different from its integer representation" do
         subject { described_class.new(string_value: "1234567890.0") }
 
         it "returns :string" do
@@ -51,7 +51,7 @@ RSpec.describe Type do
         end
       end
 
-      context "it contains a decimal point" do
+      context "when it contains a decimal point" do
         subject { described_class.new(string_value: "3.14") }
 
         it "returns :string" do
@@ -59,7 +59,7 @@ RSpec.describe Type do
         end
       end
 
-      context "it contains a comma" do
+      context "when it contains a comma" do
         subject { described_class.new(string_value: "1,000") }
 
         it "returns :string" do
@@ -67,7 +67,7 @@ RSpec.describe Type do
         end
       end
 
-      context "it contains a massive number" do
+      context "when it contains a massive number" do
         subject { described_class.new(string_value: "123456789012345678901234567890") }
 
         it "returns :string" do
