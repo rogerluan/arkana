@@ -11,6 +11,10 @@ module Type
       when "true", "false"
         BOOLEAN
       when /^\d+$/
+        # Handles cases like "0001" which should be interpreted as strings
+        return STRING if string_value.to_i.to_s != string_value
+        # Handle int overflow
+        return STRING if string_value.to_i > (2**31) - 1
         INTEGER
       else
         STRING

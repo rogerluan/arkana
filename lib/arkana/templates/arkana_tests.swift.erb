@@ -86,6 +86,46 @@ final class <%= @namespace %>Tests: XCTestCase {
         XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), 42)
     }
 
+    func test_decodeIntValueWithLeadingZeroes_shouldDecodeAsString() {
+<% int_with_leading_zeroes_key = "0001" %>
+<% secret = generate_test_secret(key: int_with_leading_zeroes_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "0001")
+    }
+
+    func test_decodeMassiveIntValue_shouldDecodeAsString() {
+<% int_with_massive_number_key = "92233720368547758079223372036854775807" %>
+<% secret = generate_test_secret(key: int_with_massive_number_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "92233720368547758079223372036854775807")
+    }
+
+    func test_decodeNegativeIntValue_shouldDecodeAsString() {
+<% negative_int_key = "-42" %>
+<% secret = generate_test_secret(key: negative_int_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "-42")
+    }
+
+    func test_decodeFloatingPointValue_shouldDecodeAsString() {
+<% float_key = "3.14" %>
+<% secret = generate_test_secret(key: float_key) %>
+        let encoded: [UInt8] = [
+            <%= secret.encoded_value %>
+
+        ]
+        XCTAssertEqual(<%= @namespace %>.decode(encoded: encoded, cipher: salt), "3.14")
+    }
+
     func test_encodeAndDecodeValueWithDollarSign_shouldDecode() {
 <% dollar_sign_key = "real_$lim_shady" %>
 <% secret = generate_test_secret(key: dollar_sign_key) %>
