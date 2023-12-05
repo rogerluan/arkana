@@ -1,0 +1,91 @@
+# frozen_string_literal: true
+
+RSpec.describe KotlinCodeGenerator do
+  let(:config) { Config.new(YAML.load_file("spec/fixtures/arkana-fixture.yml")) }
+  let(:salt) { SaltGenerator.generate }
+  let(:environment_secrets) do
+    Encoder.encode!(
+      keys: config.environment_keys,
+      salt: salt,
+      current_flavor: config.current_flavor,
+      environments: config.environments,
+    )
+  end
+
+  let(:global_secrets) do
+    Encoder.encode!(
+      keys: config.global_secrets,
+      salt: salt,
+      current_flavor: config.current_flavor,
+      environments: config.environments,
+    )
+  end
+
+  let(:template_arguments) do
+    TemplateArguments.new(
+      environment_secrets: environment_secrets,
+      global_secrets: global_secrets,
+      config: config,
+      salt: salt,
+    )
+  end
+
+  before do
+    config.all_keys.each do |key|
+      allow(ENV).to receive(:[]).with(key).and_return("value")
+    end
+    allow(ENV).to receive(:[]).with("ARKANA_RUNNING_CI_INTEGRATION_TESTS").and_return(true)
+  end
+
+  after { FileUtils.rm_rf(config.result_path) }
+
+  describe ".generate" do
+    let(:kotlin_module_dir) { config.result_path }
+    let(:kotlin_sources_dir) { File.join(kotlin_module_dir, config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
+
+    # NOTE: Can't use:
+    # def path(...)
+    #   Pathname.new(File.join(...))
+    # end
+    # Until the minimum target version is Ruby 2.7
+    def path(arg1, arg2, arg3 = nil)
+      arg1and2 = File.join(arg1, arg2)
+      return Pathname.new(arg1and2) unless arg3
+
+      Pathname.new(File.join(arg1and2, arg3)) if arg3
+    end
+
+    it "generates all necessary directories and files" do
+      described_class.generate(template_arguments: template_arguments, config: config)
+      expect(Pathname.new(config.result_path)).to be_directory
+      expect(path(kotlin_module_dir, "README.md")).to be_file
+      expect(path(kotlin_module_dir, "build.gradle.kts")).to be_file
+      expect(path(kotlin_sources_dir,  "#{config.namespace}Environment.kt")).to be_file
+      expect(path(kotlin_sources_dir,  "#{config.namespace}.kt")).to be_file
+    end
+
+    context "when 'config.should_generate_gradle_build_file'" do
+      context "when is 'true'" do
+        before do
+          allow(config).to receive(:should_generate_gradle_build_file).and_return(true)
+          described_class.generate(template_arguments: template_arguments, config: config)
+        end
+
+        it "generates gradle build file" do
+          expect(path(kotlin_module_dir, "build.gradle.kts")).to be_file
+        end
+      end
+
+      context "when is 'false'" do
+        before do
+          allow(config).to receive(:should_generate_gradle_build_file).and_return(false)
+          described_class.generate(template_arguments: template_arguments, config: config)
+        end
+
+        it "generates gradle build file" do
+          expect(path(kotlin_module_dir, "build.gradle.kts")).not_to be_file
+        end
+      end
+    end
+  end
+end

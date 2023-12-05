@@ -40,6 +40,24 @@ RSpec.describe ConfigParser do
       end
     end
 
+    describe "#current_lang" do
+      describe "when language is specified in arguments" do
+        let(:lang) { "kotlin" }
+
+        before { ARGV << "--lang" << lang }
+
+        it "is the same as the language specified" do
+          expect(subject.current_lang).to eq lang
+        end
+      end
+
+      describe "when flavor is not specified in arguments" do
+        it "is nil" do
+          expect(subject.current_flavor).to be_nil
+        end
+      end
+    end
+
     describe "#dotenv_filepath" do
       context "when dotenv_filepath is specified" do
         context "when it exists" do
