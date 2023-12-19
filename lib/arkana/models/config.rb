@@ -32,6 +32,8 @@ class Config
   attr_reader :should_cocoapods_cross_import_modules
   # @returns [boolean]
   attr_reader :should_generate_gradle_build_file
+  # @returns [int]
+  attr_reader :kotlin_jvm_toolchain_version
 
   # @returns [string]
   attr_accessor :current_flavor
@@ -61,6 +63,7 @@ class Config
     @should_cocoapods_cross_import_modules = true if @should_cocoapods_cross_import_modules.nil?
     @should_generate_gradle_build_file = yaml["should_generate_gradle_build_file"]
     @should_generate_gradle_build_file = true if @should_generate_gradle_build_file.nil?
+    @kotlin_jvm_toolchain_version = yaml["kotlin_jvm_toolchain_version"] || 11
   end
   # rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 

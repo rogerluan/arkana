@@ -22,6 +22,8 @@ class TemplateArguments
     @namespace = config.namespace
     # Name of the kotlin package to be used for the generated code.
     @kotlin_package_name = config.kotlin_package_name
+    # The kotlin JVM toolchain JDK version to be used in the generated build.gradle file.
+    @kotlin_jvm_toolchain_version = config.kotlin_jvm_toolchain_version
     # The property declaration strategy declared in the config file.
     @swift_declaration_strategy = config.swift_declaration_strategy
     # Whether unit tests should be generated.
