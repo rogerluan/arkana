@@ -45,9 +45,7 @@ Your project must be using Swift Package Manager or CocoaPods as dependency mana
 
 ## Android
 
-The Java/Kotlin code generator hasn't been implemented yet. Star and "watch" this project and check back in the future, or help us build it [here](https://github.com/rogerluan/arkana/issues/1).
-
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/8419048/177968055-6774ad8e-2ef3-45ed-9e26-fbe73a783083.png">
+Your project must be using the Gradle Build Tool.
 
 ## Preview
 
@@ -92,13 +90,14 @@ Usage: arkana [options]
     -e /path/to/your/.env,                Path to your dotenv file. Defaults to '.env' if one exists.
         --dotenv-filepath
     -f, --flavor FrostedFlakes       Flavors are useful, for instance, when generating secrets for white-label projects. See the README for more information
+    -l, --lang kotlin Language to produce keys for, e.g. kotlin, swift. Defaults to swift.
 ```
 
 Note that you have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
 
 Arkana only has one command, which parses your config file and env vars, generating all the code needed. Arkana should always be run before attempting to build your project, to make sure the files exist _and_ are up-to-date (according to the current config file). This means you might need to add the Arkana run command in your CI/CD scripts, _fastlane_, Xcode Build Phases, or something similar.
 
-## Importing Arkana into your project
+## Importing Arkana into your iOS project
 
 Once the Arkana has been run, its files will be created according to the `package_manager` setting defined in your config file, so update that setting according to your project needs.
 
@@ -145,11 +144,46 @@ After adding its dependency, you should be able to `import ArkanaKeys` (or the `
 
 We recommend you to add your ArkanaKeys directory to your `.gitignore` since it's an auto-generated code that will change every time you run Arkana (since its salt gets generated on each run). For more information, see [How does it work?](#how-does-it-work)
 
+## Importing Arkana into your Android project
+
+When using Arkana, its files can either be generated inside a new Gradle module created by Arkana or added to an existing module. This is determined according to the settings defined in your config file, so update that setting according to your project needs.
+
+#### Generating a new Arkana Gradle module
+
+To create a new Gradle module with Arkana files, follow the steps outlined below:
+
+1. Set the `result_path` in your config to be the name of the Arkana module to be generated.
+2. Modify your project's `settings.gradle` file to include the newly created Arkana module.
+
+#### Adding Arkana to an existing Gradle module
+
+To include the generated Arkana files in an existing Gradle module, follow the steps outlined below:
+
+1. Set the `result_path` in your config file to be the name of the existing Gradle module where you want to include the generated Arkana files.
+2. Set the `should_generate_gradle_build_file` to `false` to prevent overwriting your existing module's build.gradle file.
+
+
+Finally, if you want Arkana to execute automatically during Gradle sync, update your `settings.gradle` file to include the code below:
+
+```kotlin
+exec {
+    commandLine("arkana", "--lang", "kotlin")
+}
+```
+
 ## Options
 
 ### `--help`
 
 Will display a list of the available options.
+
+### `--lang`
+
+Usage: `--lang kotlin`
+
+Indicates the language to produce keys for, e.g. kotlin, swift. 
+
+Defaults to swift.
 
 ### `--config-file-path`
 
