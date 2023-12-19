@@ -9,7 +9,7 @@ package <%= @kotlin_package_name %>
 object <%= @namespace %> {
     private val salt = listOf(<%= @salt.formatted %>)
 
-    private fun decode(encoded: List<Int>, cipher: List<Int>): String {
+    internal fun decode(encoded: List<Int>, cipher: List<Int>): String {
         val decoded = encoded.mapIndexed { index, item ->
             (item xor cipher[(index % cipher.size)]).toByte()
 		}.toByteArray()
@@ -17,11 +17,11 @@ object <%= @namespace %> {
         return decoded.toString(Charsets.UTF_8)
     }
 
-    private fun decodeInt(encoded: List<Int>, cipher: List<Int>): Int {
+    internal fun decodeInt(encoded: List<Int>, cipher: List<Int>): Int {
         return decode(encoded = encoded, cipher = cipher).toInt()
     }
     
-    private fun decodeBoolean(encoded: List<Int>, cipher: List<Int>): Boolean {
+    internal fun decodeBoolean(encoded: List<Int>, cipher: List<Int>): Boolean {
         return decode(encoded = encoded, cipher = cipher).toBoolean()
     }
 
@@ -37,7 +37,7 @@ object <%= @namespace %> {
     }
 
 <% for environment in @environments %>
-    object <%= environment %>: <%= @namespace %>Environment {
+    object <%= environment %> : <%= @namespace %>Environment {
 <% for secret in environment_protocol_secrets(environment) %>
         override val <%= secret.protocol_key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %> 
             get() {

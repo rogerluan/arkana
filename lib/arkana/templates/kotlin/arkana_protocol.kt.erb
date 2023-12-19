@@ -8,6 +8,6 @@ package <%= @kotlin_package_name %>
 interface <%= @namespace %>Environment {
 <% for secret in @environment_secrets.uniq(&:protocol_key) %>
     val <%= secret.protocol_key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %>
-<% end %>
 
+<% end %>
 }

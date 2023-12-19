@@ -51,7 +51,7 @@ class Config
     @pod_name = yaml["pod_name"] || default_name
     @result_path = yaml["result_path"] || default_name
     @kotlin_package_name = yaml["kotlin_package_name"] || "com.arkanakeys"
-    @kotlin_sources_path = yaml["kotlin_sources_path"] || "src/main/kotlin"
+    @kotlin_sources_path = yaml["kotlin_sources_path"] || "kotlin"
     @flavors = yaml["flavors"] || []
     @swift_declaration_strategy = yaml["swift_declaration_strategy"] || "let"
     @should_generate_unit_tests = yaml["should_generate_unit_tests"]
