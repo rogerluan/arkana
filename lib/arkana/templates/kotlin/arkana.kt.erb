@@ -12,22 +12,23 @@ object <%= @namespace %> {
     internal fun decode(encoded: List<Int>, cipher: List<Int>): String {
         val decoded = encoded.mapIndexed { index, item ->
             (item xor cipher[(index % cipher.size)]).toByte()
-		}.toByteArray()
-        
+        }.toByteArray()
+
         return decoded.toString(Charsets.UTF_8)
     }
 
     internal fun decodeInt(encoded: List<Int>, cipher: List<Int>): Int {
         return decode(encoded = encoded, cipher = cipher).toInt()
     }
-    
+
     internal fun decodeBoolean(encoded: List<Int>, cipher: List<Int>): Boolean {
         return decode(encoded = encoded, cipher = cipher).toBoolean()
     }
 
     object Global {
 <% for secret in @global_secrets %>
-        val <%= secret.key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %> 
+        val <%= secret.key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %>
+
             get() {
                 val encoded = listOf(<%= secret.encoded_value %>)
 
@@ -39,7 +40,8 @@ object <%= @namespace %> {
 <% for environment in @environments %>
     object <%= environment %> : <%= @namespace %>Environment {
 <% for secret in environment_protocol_secrets(environment) %>
-        override val <%= secret.protocol_key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %> 
+        override val <%= secret.protocol_key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %>
+
             get() {
                 val encoded = listOf(<%= secret.encoded_value %>)
 
@@ -47,6 +49,5 @@ object <%= @namespace %> {
             }
 <% end %>
     }
-
 <% end %>
 }
