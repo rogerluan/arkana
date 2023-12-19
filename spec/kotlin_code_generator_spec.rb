@@ -41,7 +41,8 @@ RSpec.describe KotlinCodeGenerator do
 
   describe ".generate" do
     let(:kotlin_module_dir) { config.result_path }
-    let(:kotlin_sources_dir) { File.join(kotlin_module_dir, config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
+    let(:kotlin_sources_dir) { File.join(kotlin_module_dir, "src", "main", config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
+    let(:kotlin_tests_dir) { File.join(kotlin_module_dir, "src", "test", config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
 
     # NOTE: Can't use:
     # def path(...)
@@ -85,6 +86,29 @@ RSpec.describe KotlinCodeGenerator do
         it "generates gradle build file" do
           expect(path(kotlin_module_dir, "build.gradle.kts")).not_to be_file
         end
+      end
+    end
+
+    context "when 'config.should_generate_unit_tests' is true" do
+      before do
+        allow(config).to receive(:should_generate_unit_tests).and_return(true)
+        described_class.generate(template_arguments: template_arguments, config: config)
+      end
+
+      it "generates test folder and files" do
+        expect(path(kotlin_tests_dir, "#{config.namespace}Test.kt")).to be_file
+      end
+    end
+
+    context "when 'config.should_generate_unit_tests' is false" do
+      before do
+        allow(config).to receive(:should_generate_unit_tests).and_return(false)
+        described_class.generate(template_arguments: template_arguments, config: config)
+      end
+
+      it "does not generate test folder or files" do
+        expect(path(kotlin_tests_dir, "#{config.namespace}Test.kt")).not_to be_file
+        expect(Pathname.new(kotlin_tests_dir)).not_to be_directory
       end
     end
   end
