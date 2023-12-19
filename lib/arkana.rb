@@ -48,7 +48,7 @@ module Arkana
     generator = case config.current_lang.downcase
       when "swift" then SwiftCodeGenerator
       when "kotlin" then KotlinCodeGenerator
-      else UI.crash("Unknown output lang selected: #{config.current_lang.downcase}")
+      else UI.crash("Unknown output lang selected: #{config.current_lang}")
     end
 
     generator.method(:generate).call(
