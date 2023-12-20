@@ -85,12 +85,14 @@ Once you have create your config file, you can run Arkana:
 
 ```sh
 Usage: arkana [options]
-    -c /path/to/your/.arkana.yml,         Path to your config file. Defaults to '.arkana.yml'
+    -c /path/to/your/.arkana.yml,    Path to your config file. Defaults to '.arkana.yml'
         --config-filepath
-    -e /path/to/your/.env,                Path to your dotenv file. Defaults to '.env' if one exists.
+    -e /path/to/your/.env,           Path to your dotenv file. Defaults to '.env' if one exists.
         --dotenv-filepath
     -f, --flavor FrostedFlakes       Flavors are useful, for instance, when generating secrets for white-label projects. See the README for more information
-    -l, --lang kotlin Language to produce keys for, e.g. kotlin, swift. Defaults to swift.
+    -i debug,release,                Optionally pass the environments that you want Arkana to generate secrets for. Useful if you only want to build a certain environment, e.g. just Debug in local machines, while only building Staging and Release in CI. Separate the keys using a comma, without spaces. When omitted, Arkana generate secrets for all environments.
+        --include-environments
+    -l, --lang kotlin                Language to produce keys for, e.g. kotlin, swift. Defaults to swift. See the README for more information
 ```
 
 Note that you have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
@@ -146,24 +148,25 @@ We recommend you to add your ArkanaKeys directory to your `.gitignore` since it'
 
 ## Importing Arkana into your Android project
 
-When using Arkana, its files can either be generated inside a new Gradle module created by Arkana or added to an existing module. This is determined according to the settings defined in your config file, so update that setting according to your project needs.
+When importing Arkana into your project, you have two options: generating its files within a new Gradle module created by Arkana, or adding them to an existing module. The choice depends on the settings in your config file, so ensure these are updated to reflect your project's requirements.
 
-#### Generating a new Arkana Gradle module
+### Creating a New Arkana Gradle Module
 
-To create a new Gradle module with Arkana files, follow the steps outlined below:
+To generate a new Gradle module containing Arkana files, follow these steps:
 
-1. Set the `result_path` in your config to be the name of the Arkana module to be generated.
-2. Modify your project's `settings.gradle` file to include the newly created Arkana module.
+1. In your config file, set the `result_path` to the desired name for the new Arkana module.
+2. Update your project's `settings.gradle` file to include this newly created Arkana module.
 
-#### Adding Arkana to an existing Gradle module
+### Adding Arkana to an Existing Gradle Module
 
-To include the generated Arkana files in an existing Gradle module, follow the steps outlined below:
+If you prefer to add Arkana files to an existing Gradle module, follow these steps:
 
-1. Set the `result_path` in your config file to be the name of the existing Gradle module where you want to include the generated Arkana files.
-2. Set the `should_generate_gradle_build_file` to `false` to prevent overwriting your existing module's build.gradle file.
+1. Adjust the `result_path` in your config file to specify the existing Gradle module where you want to include the Arkana files.
+2. Change `should_generate_gradle_build_file` to `false`. This prevents the overwriting of your existing module's `build.gradle` file.
 
+### Automating Arkana Execution During Gradle Sync
 
-Finally, if you want Arkana to execute automatically during Gradle sync, update your `settings.gradle` file to include the code below:
+For automatic execution of Arkana during Gradle sync, modify your `settings.gradle` file by adding the following code:
 
 ```kotlin
 exec {
@@ -181,7 +184,7 @@ Will display a list of the available options.
 
 Usage: `--lang kotlin`
 
-Indicates the language to produce keys for, e.g. kotlin, swift. 
+Indicates the language to produce keys for, e.g. kotlin, swift.
 
 Defaults to swift.
 
