@@ -70,6 +70,7 @@ public extension MySecrets {
         }()
     }
 }
+
 public extension MySecrets {
     struct Staging: MySecretsEnvironmentProtocol {
         public init() {}

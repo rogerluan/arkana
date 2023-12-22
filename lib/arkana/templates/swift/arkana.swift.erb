@@ -55,7 +55,7 @@ public extension <%= @namespace %> {
     }
 }
 
-<% for environment in @environments %>
+<% @environments.each_with_index do |environment, env_index| %>
 public extension <%= @namespace %> {
     struct <%= environment %>: <%= @namespace %>EnvironmentProtocol {
         public init() {}
@@ -72,4 +72,7 @@ public extension <%= @namespace %> {
 <% end %>
     }
 }
+<% unless env_index == @environments.length - 1 %>
+
+<% end %>
 <% end %>
