@@ -409,17 +409,17 @@ Special thanks to [@danilobecke](https://github.com/danilobecke) for the inspira
 
 # Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
 
 To bump the lib's version, run `bundle exec rake bump[1.2.3]` (replacing the value with the desired version).
 
-To release a new version, update the version number in `version.rb` (likely done via `rake bump` above), and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To release a new version, make sure the version number in `version.rb` is the one you want to release (after setting it via `bundle exec rake bump` as shown above), and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 # Contributing
 
-If you spot something wrong, missing, or if you'd like to propose improvements to this project, please open an Issue or a Pull Request with your ideas and I promise to get back to you within 24 hours! 😇
+Contributions to Arkana are warmly welcomed. Whether it's bug reports, feature requests, or code contributions, your input is highly valued. Please feel free to submit issues and pull requests with your ideas and I promise to get back to you within 24 hours! 😇
 
 This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](CODE_OF_CONDUCT.md).
 
