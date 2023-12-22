@@ -15,7 +15,6 @@ coverage
 
 # Compiled Kotlin/Java class files
 *.class
-*.jar
 
 # IntelliJ IDEA files
 .idea/
