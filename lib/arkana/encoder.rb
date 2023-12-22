@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "arkana/helpers/string"
-require "arkana/helpers/enumerable"
 
 # The encoder is responsible for finding the env vars for given keys, encoding them, and creating Secrets based on the generated data.
 module Encoder
