@@ -92,7 +92,7 @@ Usage: arkana [options]
     -f, --flavor FrostedFlakes       Flavors are useful, for instance, when generating secrets for white-label projects. See the README for more information
     -i debug,release,                Optionally pass the environments that you want Arkana to generate secrets for. Useful if you only want to build a certain environment, e.g. just Debug in local machines, while only building Staging and Release in CI. Separate the keys using a comma, without spaces. When omitted, Arkana generate secrets for all environments.
         --include-environments
-    -l, --lang kotlin                Language to produce keys for, e.g. kotlin, swift. Defaults to swift. See the README for more information
+    -l, --lang kotlin                Language to produce keys for, e.g. kotlin, swift. Defaults to 'swift'. See the README for more information
 ```
 
 Note that you have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
@@ -186,7 +186,7 @@ Usage: `--lang kotlin`
 
 Indicates the language to produce keys for, e.g. kotlin, swift.
 
-Defaults to swift.
+Defaults to `swift`.
 
 ### `--config-file-path`
 

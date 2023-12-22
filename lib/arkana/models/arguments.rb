@@ -36,7 +36,7 @@ class Arguments
       opt.on("-i", "--include-environments debug,release", "Optionally pass the environments that you want Arkana to generate secrets for. Useful if you only want to build a certain environment, e.g. just Debug in local machines, while only building Staging and Release in CI. Separate the keys using a comma, without spaces. When ommitted, Arkana generate secrets for all environments.") do |o|
         @include_environments = o.split(",")
       end
-      opt.on("-l", "--lang kotlin", "Language to produce keys for, e.g. kotlin, swift. Defaults to swift. See the README for more information") do |o|
+      opt.on("-l", "--lang kotlin", "Language to produce keys for, e.g. kotlin, swift. Defaults to 'swift'. See the README for more information") do |o|
         @lang = o
       end
     end.parse!
