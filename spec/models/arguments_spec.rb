@@ -8,7 +8,7 @@ RSpec.describe Arguments do
   before { ARGV.replace([]) }
 
   describe "#config_filepath" do
-    context "when the option is ommitted in ARGV" do
+    context "when the option is omitted in ARGV" do
       it "defaults to the default value" do
         expect(subject.config_filepath).to eq ".arkana.yml"
       end
@@ -26,7 +26,7 @@ RSpec.describe Arguments do
   end
 
   describe "#dotenv_filepath" do
-    context "when the option is ommitted in ARGV" do
+    context "when the option is omitted in ARGV" do
       describe "when .env file exists" do
         it "defaults to the default value" do
           expect(File).to receive(:exist?).with(".env").and_return(true)
@@ -54,7 +54,7 @@ RSpec.describe Arguments do
   end
 
   describe "#flavor" do
-    context "when the option is ommitted in ARGV" do
+    context "when the option is omitted in ARGV" do
       it "defaults to nil" do
         expect(subject.flavor).to be_nil
       end
@@ -72,7 +72,7 @@ RSpec.describe Arguments do
   end
 
   describe "#environments" do
-    context "when the option is ommitted in ARGV" do
+    context "when the option is omitted in ARGV" do
       it "defaults to nil" do
         expect(subject.include_environments).to be_nil
       end
