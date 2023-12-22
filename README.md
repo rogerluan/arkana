@@ -60,9 +60,6 @@ The image below shows how the auto-generated file looks like.
   <img src="docs/kotlin-demo.png">
 </div>
 
-</p>
-</details>
-
 Usage using the example code above:
 
 ```kotlin
@@ -78,6 +75,9 @@ val keys = if (Math.random() < 0.5) MySecrets.Dev else MySecrets.Staging
 println(keys.serviceKey)
 ```
 
+</p>
+</details>
+
 ### Swift
 
 <details><summary>Click here to see the Swift preview</summary>
@@ -88,9 +88,6 @@ The image below shows how the auto-generated file looks like.
 <div align="center">
   <img src="docs/swift-demo.png">
 </div>
-
-</p>
-</details>
 
 Usage using the example code above:
 
@@ -106,6 +103,9 @@ print(MySecrets.Global().mySecretAPIKey)
 let keys: MySecretsEnvironmentProtocol = Bool.random() ? MySecrets.Dev() : MySecrets.Staging()
 print(keys.serviceKey)
 ```
+
+</p>
+</details>
 
 # Installation
 
