@@ -44,16 +44,8 @@ RSpec.describe KotlinCodeGenerator do
     let(:kotlin_sources_dir) { File.join(kotlin_module_dir, "src", "main", config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
     let(:kotlin_tests_dir) { File.join(kotlin_module_dir, "src", "test", config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
 
-    # NOTE: Can't use:
-    # def path(...)
-    #   Pathname.new(File.join(...))
-    # end
-    # Until the minimum target version is Ruby 2.7
-    def path(arg1, arg2, arg3 = nil)
-      arg1and2 = File.join(arg1, arg2)
-      return Pathname.new(arg1and2) unless arg3
-
-      Pathname.new(File.join(arg1and2, arg3)) if arg3
+    def path(...)
+      Pathname.new(File.join(...))
     end
 
     it "generates all necessary directories and files" do
