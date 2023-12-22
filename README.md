@@ -37,22 +37,53 @@
 
 # Requirements
 
+## Android
+
+Your project must be using the Gradle Build Tool.
+
 ## iOS
 
 Your project must be using Swift Package Manager or CocoaPods as dependency manager (or both). No support for Carthage.
 
 <sub>Note: this gem was only tested in macOS environments.</sub>
 
-## Android
-
-Your project must be using the Gradle Build Tool.
-
 ## Preview
 
-<details><summary>Click here to show an image with the preview!</summary>
+### Kotlin
+
+<details><summary>Click here to see the Kotlin preview</summary>
 <p>
 
-The image below shows how the auto-generated file looks like. At the bottom of it you can see how you'll consume the code generated.
+The image below shows how the auto-generated file looks like.
+
+<div align="center">
+  <img src="docs/kotlin-demo.png">
+</div>
+
+</p>
+</details>
+
+Usage using the example code above:
+
+```kotlin
+import com.arkanakeys.MySecrets
+
+// Designed with testability and DI in mind
+println(MySecrets.Global.someBooleanSecret)
+println(MySecrets.Global.someIntSecret)
+println(MySecrets.Global.mySecretAPIKey)
+
+// Simulating environment selection using a random boolean value
+val keys = if (Math.random() < 0.5) MySecrets.Dev else MySecrets.Staging
+println(keys.serviceKey)
+```
+
+### Swift
+
+<details><summary>Click here to see the Swift preview</summary>
+<p>
+
+The image below shows how the auto-generated file looks like.
 
 <div align="center">
   <img src="docs/swift-demo.png">
@@ -60,6 +91,21 @@ The image below shows how the auto-generated file looks like. At the bottom of i
 
 </p>
 </details>
+
+Usage using the example code above:
+
+```swift
+import ArkanaKeys
+
+// Designed with testability and DI in mind
+print(MySecrets.Global().someBooleanSecret)
+print(MySecrets.Global().someIntSecret)
+print(MySecrets.Global().mySecretAPIKey)
+
+// This is a demo, so we are using Bool.random() to simulate the environment
+let keys: MySecretsEnvironmentProtocol = Bool.random() ? MySecrets.Dev() : MySecrets.Staging()
+print(keys.serviceKey)
+```
 
 # Installation
 
