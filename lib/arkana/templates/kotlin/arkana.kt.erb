@@ -13,7 +13,6 @@ object <%= @namespace %> {
         val decoded = encoded.mapIndexed { index, item ->
             (item xor cipher[(index % cipher.size)]).toByte()
         }.toByteArray()
-
         return decoded.toString(Charsets.UTF_8)
     }
 
@@ -26,28 +25,35 @@ object <%= @namespace %> {
     }
 
     object Global {
-<% for secret in @global_secrets %>
+<% @global_secrets.each_with_index do |secret, index| %>
         val <%= secret.key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %>
 
             get() {
                 val encoded = listOf(<%= secret.encoded_value %>)
-
                 return <%= KotlinTemplateHelper.kotlin_decode_function(secret.type) %>(encoded = encoded, cipher = salt)
             }
+<% unless index == @global_secrets.length - 1 %>
+
+<% end %>
 <% end %>
     }
 
-<% for environment in @environments %>
+<% @environments.each_with_index do |environment, env_index| %>
     object <%= environment %> : <%= @namespace %>Environment {
-<% for secret in environment_protocol_secrets(environment) %>
+<% environment_protocol_secrets(environment).each_with_index do |secret, secret_index| %>
         override val <%= secret.protocol_key.camel_case %>: <%= KotlinTemplateHelper.kotlin_type(secret.type) %>
 
             get() {
                 val encoded = listOf(<%= secret.encoded_value %>)
-
                 return <%= KotlinTemplateHelper.kotlin_decode_function(secret.type) %>(encoded = encoded, cipher = salt)
             }
+<% unless secret_index == environment_protocol_secrets(environment).length - 1 %>
+
+<% end %>
 <% end %>
     }
+<% unless env_index == @environments.length - 1 %>
+
+<% end %>
 <% end %>
 }
