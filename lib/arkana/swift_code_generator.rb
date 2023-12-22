@@ -17,11 +17,11 @@ module SwiftCodeGenerator
 
   def self.set_up_interfaces_swift_package(path, template_arguments, config)
     dirname = File.dirname(__FILE__)
-    readme_template = File.read("#{dirname}/templates/interfaces_readme.erb")
-    package_template = File.read("#{dirname}/templates/interfaces_package.swift.erb")
-    podspec_template = File.read("#{dirname}/templates/interfaces.podspec.erb")
+    readme_template = File.read("#{dirname}/templates/swift/interfaces_readme.erb")
+    package_template = File.read("#{dirname}/templates/swift/interfaces_package.swift.erb")
+    podspec_template = File.read("#{dirname}/templates/swift/interfaces.podspec.erb")
     sources_dir = File.join(path, "Sources")
-    source_template = File.read("#{dirname}/templates/arkana_protocol.swift.erb")
+    source_template = File.read("#{dirname}/templates/swift/arkana_protocol.swift.erb")
     FileUtils.mkdir_p(path)
     FileUtils.mkdir_p(sources_dir)
     render(podspec_template, template_arguments, File.join(path, "#{config.pod_name.capitalize_first_letter}Interfaces.podspec")) if config.package_manager == "cocoapods"
@@ -33,12 +33,12 @@ module SwiftCodeGenerator
   def self.set_up_swift_package(path, template_arguments, config)
     dirname = File.dirname(__FILE__)
     readme_template = File.read("#{dirname}/templates/readme.erb")
-    package_template = File.read("#{dirname}/templates/package.swift.erb")
+    package_template = File.read("#{dirname}/templates/swift/package.swift.erb")
     sources_dir = File.join(path, "Sources")
-    source_template = File.read("#{dirname}/templates/arkana.swift.erb")
+    source_template = File.read("#{dirname}/templates/swift/arkana.swift.erb")
     tests_dir = File.join(path, "Tests") if config.should_generate_unit_tests
-    tests_template = File.read("#{dirname}/templates/arkana_tests.swift.erb")
-    podspec_template = File.read("#{dirname}/templates/arkana.podspec.erb")
+    tests_template = File.read("#{dirname}/templates/swift/arkana_tests.swift.erb")
+    podspec_template = File.read("#{dirname}/templates/swift/arkana.podspec.erb")
     FileUtils.mkdir_p(path)
     FileUtils.mkdir_p(sources_dir)
     FileUtils.mkdir_p(tests_dir) if config.should_generate_unit_tests

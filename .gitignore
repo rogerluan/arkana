@@ -7,8 +7,18 @@
 /spec/reports/
 /tmp/
 
-# rspec failure tracking
+# Rspec failure tracking
 .rspec_status
 coverage
 *.gem
 **/.DS_Store
+
+# Compiled Kotlin/Java class files
+*.class
+
+# IntelliJ IDEA files
+.idea/
+
+# Gradle files
+.gradle/
+build/

@@ -47,5 +47,22 @@ RSpec.describe Arkana do
         expect { described_class.run(arguments) }.not_to raise_error
       end
     end
+
+    context "when kotlin is specified as the language" do
+      let(:lang) { "kotlin" }
+
+      before do
+        ARGV << "--lang" << lang
+
+        config.all_keys.each do |key|
+          allow(ENV).to receive(:[]).with(key).and_return("lorem ipsum")
+        end
+      end
+
+      it "calls KotlinCodeGenerator.generate" do
+        expect(KotlinCodeGenerator).to receive(:generate)
+        described_class.run(arguments)
+      end
+    end
   end
 end

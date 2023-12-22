@@ -21,6 +21,16 @@ task :test_swift do
   FileUtils.rm_rf("tests")
 end
 
+desc "Generates Kotlin source code and run its unit tests."
+task :test_kotlin do
+  FileUtils.copy_entry("spec/fixtures/kotlin", "tests")
+  sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true bin/arkana --lang kotlin --config-filepath spec/fixtures/kotlin-tests.yml --dotenv-filepath spec/fixtures/.env.fruitloops --include-environments dev,staging")
+  Dir.chdir("tests") do
+    sh("./gradlew test")
+  end
+  FileUtils.rm_rf("tests")
+end
+
 desc "Sets lib version to the semantic version given, and push it to remote."
 task :bump, [:v] do |_t, args|
   version = args[:v] || raise("A version is required. Pass it like `rake bump[1.2.3]`")

@@ -37,28 +37,72 @@
 
 # Requirements
 
+## Android
+
+Your project must be using the Gradle Build Tool.
+
 ## iOS
 
 Your project must be using Swift Package Manager or CocoaPods as dependency manager (or both). No support for Carthage.
 
 <sub>Note: this gem was only tested in macOS environments.</sub>
 
-## Android
-
-The Java/Kotlin code generator hasn't been implemented yet. Star and "watch" this project and check back in the future, or help us build it [here](https://github.com/rogerluan/arkana/issues/1).
-
-<img width="200" alt="image" src="https://user-images.githubusercontent.com/8419048/177968055-6774ad8e-2ef3-45ed-9e26-fbe73a783083.png">
-
 ## Preview
 
-<details><summary>Click here to show an image with the preview!</summary>
+### Kotlin
+
+<details><summary>Click here to see the Kotlin preview</summary>
 <p>
 
-The image below shows how the auto-generated file looks like. At the bottom of it you can see how you'll consume the code generated.
+The image below shows how the auto-generated file looks like.
+
+<div align="center">
+  <img src="docs/kotlin-demo.png">
+</div>
+
+Usage using the example code above:
+
+```kotlin
+import com.arkanakeys.MySecrets
+
+// Designed with testability and DI in mind
+println(MySecrets.Global.someBooleanSecret)
+println(MySecrets.Global.someIntSecret)
+println(MySecrets.Global.mySecretAPIKey)
+
+// Simulating environment selection using a random boolean value
+val keys = if (Math.random() < 0.5) MySecrets.Dev else MySecrets.Staging
+println(keys.serviceKey)
+```
+
+</p>
+</details>
+
+### Swift
+
+<details><summary>Click here to see the Swift preview</summary>
+<p>
+
+The image below shows how the auto-generated file looks like.
 
 <div align="center">
   <img src="docs/swift-demo.png">
 </div>
+
+Usage using the example code above:
+
+```swift
+import ArkanaKeys
+
+// Designed with testability and DI in mind
+print(MySecrets.Global().someBooleanSecret)
+print(MySecrets.Global().someIntSecret)
+print(MySecrets.Global().mySecretAPIKey)
+
+// This is a demo, so we are using Bool.random() to simulate the environment
+let keys: MySecretsEnvironmentProtocol = Bool.random() ? MySecrets.Dev() : MySecrets.Staging()
+print(keys.serviceKey)
+```
 
 </p>
 </details>
@@ -87,18 +131,21 @@ Once you have create your config file, you can run Arkana:
 
 ```sh
 Usage: arkana [options]
-    -c /path/to/your/.arkana.yml,         Path to your config file. Defaults to '.arkana.yml'
+    -c /path/to/your/.arkana.yml,    Path to your config file. Defaults to '.arkana.yml'
         --config-filepath
-    -e /path/to/your/.env,                Path to your dotenv file. Defaults to '.env' if one exists.
+    -e /path/to/your/.env,           Path to your dotenv file. Defaults to '.env' if one exists.
         --dotenv-filepath
     -f, --flavor FrostedFlakes       Flavors are useful, for instance, when generating secrets for white-label projects. See the README for more information
+    -i debug,release,                Optionally pass the environments that you want Arkana to generate secrets for. Useful if you only want to build a certain environment, e.g. just Debug in local machines, while only building Staging and Release in CI. Separate the keys using a comma, without spaces. When omitted, Arkana generate secrets for all environments.
+        --include-environments
+    -l, --lang kotlin                Language to produce keys for, e.g. kotlin, swift. Defaults to 'swift'. See the README for more information
 ```
 
 Note that you have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
 
 Arkana only has one command, which parses your config file and env vars, generating all the code needed. Arkana should always be run before attempting to build your project, to make sure the files exist _and_ are up-to-date (according to the current config file). This means you might need to add the Arkana run command in your CI/CD scripts, _fastlane_, Xcode Build Phases, or something similar.
 
-## Importing Arkana into your project
+## Importing Arkana into your iOS project
 
 Once the Arkana has been run, its files will be created according to the `package_manager` setting defined in your config file, so update that setting according to your project needs.
 
@@ -145,11 +192,47 @@ After adding its dependency, you should be able to `import ArkanaKeys` (or the `
 
 We recommend you to add your ArkanaKeys directory to your `.gitignore` since it's an auto-generated code that will change every time you run Arkana (since its salt gets generated on each run). For more information, see [How does it work?](#how-does-it-work)
 
+## Importing Arkana into your Android project
+
+When importing Arkana into your project, you have two options: generating its files within a new Gradle module created by Arkana, or adding them to an existing module. The choice depends on the settings in your config file, so ensure these are updated to reflect your project's requirements.
+
+### Creating a New Arkana Gradle Module
+
+To generate a new Gradle module containing Arkana files, follow these steps:
+
+1. In your config file, set the `result_path` to the desired name for the new Arkana module.
+2. Update your project's `settings.gradle` file to include this newly created Arkana module.
+
+### Adding Arkana to an Existing Gradle Module
+
+If you prefer to add Arkana files to an existing Gradle module, follow these steps:
+
+1. Adjust the `result_path` in your config file to specify the existing Gradle module where you want to include the Arkana files.
+2. Change `should_generate_gradle_build_file` to `false`. This prevents the overwriting of your existing module's `build.gradle` file.
+
+### Automating Arkana Execution During Gradle Sync
+
+For automatic execution of Arkana during Gradle sync, modify your `settings.gradle` file by adding the following code:
+
+```kotlin
+exec {
+    commandLine("arkana", "--lang", "kotlin")
+}
+```
+
 ## Options
 
 ### `--help`
 
 Will display a list of the available options.
+
+### `--lang`
+
+Usage: `--lang kotlin`
+
+Indicates the language to produce keys for, e.g. kotlin, swift.
+
+Defaults to `swift`.
 
 ### `--config-file-path`
 

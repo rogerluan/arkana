@@ -16,6 +16,10 @@ class Config
   attr_reader :pod_name
   # @returns [string]
   attr_reader :result_path
+  # @returns [string]
+  attr_reader :kotlin_package_name
+  # @returns [string]
+  attr_reader :kotlin_sources_path
   # @returns [string[]]
   attr_reader :flavors
   # @returns [string]
@@ -26,11 +30,17 @@ class Config
   attr_reader :package_manager
   # @returns [boolean]
   attr_reader :should_cocoapods_cross_import_modules
+  # @returns [boolean]
+  attr_reader :should_generate_gradle_build_file
+  # @returns [int]
+  attr_reader :kotlin_jvm_toolchain_version
 
   # @returns [string]
   attr_accessor :current_flavor
   # @returns [string]
   attr_accessor :dotenv_filepath
+  # @returns [string]
+  attr_accessor :current_lang
 
   # rubocop:disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
   def initialize(yaml)
@@ -42,6 +52,8 @@ class Config
     @import_name = yaml["import_name"] || default_name
     @pod_name = yaml["pod_name"] || default_name
     @result_path = yaml["result_path"] || default_name
+    @kotlin_package_name = yaml["kotlin_package_name"] || "com.arkanakeys"
+    @kotlin_sources_path = yaml["kotlin_sources_path"] || "kotlin"
     @flavors = yaml["flavors"] || []
     @swift_declaration_strategy = yaml["swift_declaration_strategy"] || "let"
     @should_generate_unit_tests = yaml["should_generate_unit_tests"]
@@ -49,6 +61,9 @@ class Config
     @package_manager = yaml["package_manager"] || "spm"
     @should_cocoapods_cross_import_modules = yaml["should_cocoapods_cross_import_modules"]
     @should_cocoapods_cross_import_modules = true if @should_cocoapods_cross_import_modules.nil?
+    @should_generate_gradle_build_file = yaml["should_generate_gradle_build_file"]
+    @should_generate_gradle_build_file = true if @should_generate_gradle_build_file.nil?
+    @kotlin_jvm_toolchain_version = yaml["kotlin_jvm_toolchain_version"] || 11
   end
   # rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
