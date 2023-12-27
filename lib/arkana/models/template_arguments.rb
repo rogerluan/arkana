@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "arkana/models/secret"
+require_relative "secret"
 
 # A class that defines template arguments in a language-agnostic form.
 class TemplateArguments
