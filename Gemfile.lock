@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arkana (1.6.0)
+    arkana (2.0.0)
       dotenv (~> 2.7)
       rainbow (~> 3.1.1)
       yaml (~> 0.2)
@@ -83,7 +83,7 @@ GEM
     tty-screen (0.8.1)
     unicode-display_width (2.4.2)
     wisper (2.0.1)
-    yaml (0.2.1)
+    yaml (0.3.0)
 
 PLATFORMS
   arm64-darwin-21
