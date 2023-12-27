@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "erb"
-require "fileutils"
+require "erb" unless defined?(Erb)
+require "fileutils" unless defined?(FileUtils)
 require_relative "helpers/string"
 
 # Responsible for generating Kotlin source and test files.
