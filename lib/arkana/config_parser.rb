@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "yaml"
+require "yaml" unless defined?(YAML)
 require_relative "models/config"
 require_relative "helpers/ui"
 

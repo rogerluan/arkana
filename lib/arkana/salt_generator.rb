@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "securerandom"
+require "securerandom" unless defined?(SecureRandom)
 require_relative "models/salt"
 
 # Responsible for generating the salt.
