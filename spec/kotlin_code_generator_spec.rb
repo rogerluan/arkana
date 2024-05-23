@@ -44,17 +44,45 @@ RSpec.describe KotlinCodeGenerator do
     let(:kotlin_sources_dir) { File.join(kotlin_module_dir, "src", "main", config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
     let(:kotlin_tests_dir) { File.join(kotlin_module_dir, "src", "test", config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
 
+    let(:kmp_sources_dir) { File.join(kotlin_module_dir, "src", "commonMain", config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
+    let(:kmp_tests_dir) { File.join(kotlin_module_dir, "src", "commonTest", config.kotlin_sources_path, config.kotlin_package_name.split(".")) }
+
     def path(...)
       Pathname.new(File.join(...))
     end
 
-    it "generates all necessary directories and files" do
-      described_class.generate(template_arguments: template_arguments, config: config)
-      expect(Pathname.new(config.result_path)).to be_directory
-      expect(path(kotlin_module_dir, "README.md")).to be_file
-      expect(path(kotlin_module_dir, "build.gradle.kts")).to be_file
-      expect(path(kotlin_sources_dir,  "#{config.namespace}Environment.kt")).to be_file
-      expect(path(kotlin_sources_dir,  "#{config.namespace}.kt")).to be_file
+    context "when 'config.is_kotlin_multiplatform_module'" do
+      context "when is 'false'" do
+        before do
+          allow(config).to receive(:is_kotlin_multiplatform_module).and_return(false)
+          described_class.generate(template_arguments: template_arguments, config: config)
+        end
+
+        it "generates all necessary directories and files" do
+          described_class.generate(template_arguments: template_arguments, config: config)
+          expect(Pathname.new(config.result_path)).to be_directory
+          expect(path(kotlin_module_dir, "README.md")).to be_file
+          expect(path(kotlin_module_dir, "build.gradle.kts")).to be_file
+          expect(path(kotlin_sources_dir,  "#{config.namespace}Environment.kt")).to be_file
+          expect(path(kotlin_sources_dir,  "#{config.namespace}.kt")).to be_file
+        end
+      end
+
+      context "when is 'true'" do
+        before do
+          allow(config).to receive(:is_kotlin_multiplatform_module).and_return(true)
+          described_class.generate(template_arguments: template_arguments, config: config)
+        end
+
+        it "generates all necessary directories and files" do
+          described_class.generate(template_arguments: template_arguments, config: config)
+          expect(Pathname.new(config.result_path)).to be_directory
+          expect(path(kotlin_module_dir, "README.md")).to be_file
+          expect(path(kotlin_module_dir, "build.gradle.kts")).to be_file
+          expect(path(kmp_sources_dir,  "#{config.namespace}Environment.kt")).to be_file
+          expect(path(kmp_sources_dir,  "#{config.namespace}.kt")).to be_file
+        end
+      end
     end
 
     context "when 'config.should_generate_gradle_build_file'" do
