@@ -123,23 +123,78 @@ Alternatively, you can install it in your entire system instead (not recommended
 gem install arkana
 ```
 
-# Usage
+# Basic Usage
 
-Arkana requires the declaration of a YAML config file. Although you can name it whatever, the convention is to name it `.arkana.yml`. See [template.yml](/template.yml) for practical examples.
+Arkana requires the declaration of a YAML config file. Although you can name it whatever, the convention is to name it `.arkana.yml`. See [template.yml](/template.yml) for complete options.
 
-Once you have create your config file, you can run Arkana:
+Once you have created your config file, you can run Arkana:
 
 ```sh
 Usage: arkana [options]
     -c /path/to/your/.arkana.yml,    Path to your config file. Defaults to '.arkana.yml'
-        --config-filepath
     -e /path/to/your/.env,           Path to your dotenv file. Defaults to '.env' if one exists.
-        --dotenv-filepath
-    -f, --flavor FrostedFlakes       Flavors are useful, for instance, when generating secrets for white-label projects. See the README for more information
-    -i debug,release,                Optionally pass the environments that you want Arkana to generate secrets for. Useful if you only want to build a certain environment, e.g. just Debug in local machines, while only building Staging and Release in CI. Separate the keys using a comma, without spaces. When omitted, Arkana generate secrets for all environments.
-        --include-environments
-    -l, --lang kotlin                Language to produce keys for, e.g. kotlin, swift. Defaults to 'swift'. See the README for more information
+    -l kotlin                        Language to produce keys for, e.g. kotlin, swift. Defaults to 'swift'.
 ```
+
+
+> [!NOTE]
+> For complete set of args look at the [options](#options) section.
+
+
+### Config File
+
+The `arkana.yml` would typically contain 3 important sections
+ - **Environments** : This is typically where you specify `debug`, `release` or other environments which you wish to create 
+ - **Environment Secrets**: This is where you declare the keys which will be ultimately exposed to your app like `apiKey`
+ - **Global Secrets** : Here you'd declare keys which are the same across all environments.
+
+### Environment File
+
+The environment(.env) file contains the actual secrets for each environment. While config file declares the keys, they are assigned encrypted values from this file.
+
+#### Sample
+
+A config file as shown below
+```yaml 
+environments:
+  - Release
+  - Debug
+environment_secrets:
+  - apiKey  
+global_secrets:
+  - clientId  
+```
+
+coupled with an env file
+
+```properties
+apiKeyDebug=de_#192A3532
+apiKeyRelease=rel_#2Asdas3322
+clientId=134122
+```
+
+would generate the following accessors:
+
+```swift
+//Swift
+public extension ArkanaKeys {
+    struct Global: ArkanaKeysGlobalProtocol {
+        public let clientId: String = {<decrypted accessor>}
+    }
+}    
+public extension ArkanaKeys {
+    struct Release: ArkanaKeysEnvironmentProtocol {
+        public let apiKey: String = {<decrypted accessor>}
+    }
+}    
+public extension ArkanaKeys {
+    struct Debug: ArkanaKeysEnvironmentProtocol {
+        public let apiKey: String = {<decrypted accessor>}
+    }
+}
+```
+
+
 
 Note that you have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
 
