@@ -63,8 +63,8 @@ RSpec.describe KotlinCodeGenerator do
           expect(Pathname.new(config.result_path)).to be_directory
           expect(path(kotlin_module_dir, "README.md")).to be_file
           expect(path(kotlin_module_dir, "build.gradle.kts")).to be_file
-          expect(path(kotlin_sources_dir,  "#{config.namespace}Environment.kt")).to be_file
-          expect(path(kotlin_sources_dir,  "#{config.namespace}.kt")).to be_file
+          expect(path(kotlin_sources_dir, "#{config.namespace}Environment.kt")).to be_file
+          expect(path(kotlin_sources_dir, "#{config.namespace}.kt")).to be_file
         end
       end
 
@@ -79,8 +79,8 @@ RSpec.describe KotlinCodeGenerator do
           expect(Pathname.new(config.result_path)).to be_directory
           expect(path(kotlin_module_dir, "README.md")).to be_file
           expect(path(kotlin_module_dir, "build.gradle.kts")).to be_file
-          expect(path(kmp_sources_dir,  "#{config.namespace}Environment.kt")).to be_file
-          expect(path(kmp_sources_dir,  "#{config.namespace}.kt")).to be_file
+          expect(path(kmp_sources_dir, "#{config.namespace}Environment.kt")).to be_file
+          expect(path(kmp_sources_dir, "#{config.namespace}.kt")).to be_file
         end
       end
     end
