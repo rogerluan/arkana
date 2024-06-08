@@ -136,65 +136,65 @@ Usage: arkana [options]
     -l kotlin                        Language to produce keys for, e.g. kotlin, swift. Defaults to 'swift'.
 ```
 
-
 > [!NOTE]
-> For complete set of args look at the [options](#options) section.
-
+> For the complete set of args, look at the [options](#options) section.
 
 ### Config File
 
-The `arkana.yml` would typically contain 3 important sections
- - **Environments** : This is typically where you specify `debug`, `release` or other environments which you wish to create 
- - **Environment Secrets**: This is where you declare the keys which will be ultimately exposed to your app like `apiKey`
- - **Global Secrets** : Here you'd declare keys which are the same across all environments.
+The `arkana.yml` would typically contain 3 important sections:
+
+- **Environments**: This is typically where you specify `debug`, `release` or other environments which you wish to create.
+- **Environment Secrets**: This is where you declare the keys which will be ultimately exposed to your app, like `apiKey`.
+- **Global Secrets**: Here you'd declare keys which are the same across all environments.
 
 ### Environment File
 
-The environment(.env) file contains the actual secrets for each environment. While config file declares the keys, they are assigned encrypted values from this file.
+The environment (`.env`) file contains the actual secrets for each environment. While config file declares the keys, they are assigned encrypted values from this file.
+
+This file is optional, but quite handy in local development. `.env` files shouldn't be committed as they contain your secrets. Instead, they should be stored in a secure location, like your CI/CD server as environment variables (all CI/CD servers have a way to store secrets securely). See [Continuous Integration](#continuous-integration) for more information.
 
 #### Sample
 
-A config file as shown below
-```yaml 
+A config file as shown below:
+
+```yaml
 environments:
   - Release
   - Debug
 environment_secrets:
-  - apiKey  
+  - apiKey
 global_secrets:
-  - clientId  
+  - clientId
 ```
 
-coupled with an env file
+Coupled with an env file:
 
 ```properties
-apiKeyDebug=de_#192A3532
-apiKeyRelease=rel_#2Asdas3322
-clientId=134122
+apiKeyDebug = "your_debug_api_key"
+apiKeyRelease = "your_release_api_key"
+clientId = "your_client_id"
 ```
 
-would generate the following accessors:
+Would generate the following accessors:
 
 ```swift
-//Swift
+// Swift
 public extension ArkanaKeys {
     struct Global: ArkanaKeysGlobalProtocol {
         public let clientId: String = {<decrypted accessor>}
     }
-}    
+}
 public extension ArkanaKeys {
     struct Release: ArkanaKeysEnvironmentProtocol {
         public let apiKey: String = {<decrypted accessor>}
     }
-}    
+}
 public extension ArkanaKeys {
     struct Debug: ArkanaKeysEnvironmentProtocol {
         public let apiKey: String = {<decrypted accessor>}
     }
 }
 ```
-
-
 
 Note that you have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
 
