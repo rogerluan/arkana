@@ -20,7 +20,5 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - uses: paambaati/codeclimate-action@v6.0.0
-      with:
-        coverageCommand: bundle exec rake
-        debug: true
+    - name: Run tests
+      run: bundle exec rake
