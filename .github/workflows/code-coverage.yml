@@ -1,0 +1,20 @@
+name: Generate & Upload Code Coverage
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test:
+    env:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: head
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - uses: paambaati/codeclimate-action@v6.0.0
+      with:
+        coverageCommand: bundle exec rake
+        debug: true
