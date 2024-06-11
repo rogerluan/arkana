@@ -9,22 +9,27 @@ module KotlinCodeGenerator
   # Generates Kotlin code and test files for the given template arguments.
   def self.generate(template_arguments:, config:)
     kotlin_module_dir = config.result_path
-    kotlin_sources_dir = File.join(kotlin_module_dir, "src", "main", config.kotlin_sources_path, config.kotlin_package_name.split("."))
-    kotlin_tests_dir = File.join(kotlin_module_dir, "src", "test", config.kotlin_sources_path, config.kotlin_package_name.split("."))
+
+    source_set = config.is_kotlin_multiplatform_module ? "commonMain" : "main"
+    test_set = config.is_kotlin_multiplatform_module ? "commonTest" : "test"
+
+    kotlin_sources_dir = File.join(kotlin_module_dir, "src", source_set, config.kotlin_sources_path, config.kotlin_package_name.split("."))
+    kotlin_tests_dir = File.join(kotlin_module_dir, "src", test_set, config.kotlin_sources_path, config.kotlin_package_name.split("."))
 
     if config.should_generate_gradle_build_file
-      set_up_kotlin_module(kotlin_module_dir, template_arguments)
+      set_up_kotlin_module(kotlin_module_dir, template_arguments, config)
     end
 
     set_up_kotlin_interfaces(kotlin_sources_dir, template_arguments, config)
     set_up_kotlin_classes(kotlin_sources_dir, kotlin_tests_dir, template_arguments, config)
   end
 
-  def self.set_up_kotlin_module(path, template_arguments)
+  def self.set_up_kotlin_module(path, template_arguments, config)
     dirname = File.dirname(__FILE__)
     sources_dir = path
     readme_template = File.read("#{dirname}/templates/readme.erb")
-    source_template = File.read("#{dirname}/templates/kotlin/build.gradle.kts.erb")
+    gradle_template_file = config.is_kotlin_multiplatform_module ? "build_kmp.gradle.kts.erb" : "build.gradle.kts.erb"
+    source_template = File.read("#{dirname}/templates/kotlin/#{gradle_template_file}")
     FileUtils.mkdir_p(path)
     render(readme_template, template_arguments, File.join(path, "README.md"))
     render(source_template, template_arguments, File.join(sources_dir, "build.gradle.kts"))
