@@ -25,7 +25,8 @@ GEM
     rainbow (3.1.1)
     rake (13.2.1)
     regexp_parser (2.9.2)
-    rexml (3.2.6)
+    rexml (3.3.0)
+      strscan
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -63,6 +64,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    strscan (3.1.0)
     tty-color (0.6.0)
     tty-cursor (0.7.1)
     tty-prompt (0.23.1)
@@ -87,7 +89,6 @@ DEPENDENCIES
   arkana!
   bundler (< 2.5)
   rake
-  rexml (< 3.2.7)
   rspec
   rubocop
   rubocop-rake
