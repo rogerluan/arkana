@@ -147,11 +147,12 @@ The `arkana.yml` would typically contain 3 important sections:
 - **Environment Secrets**: This is where you declare the keys which will be ultimately exposed to your app, like `apiKey`.
 - **Global Secrets**: Here you'd declare keys which are the same across all environments.
 
-## Environment File
+## Dotenv File
 
-The environment (`.env`) file contains the actual secrets for each environment. While config file declares the keys, they are assigned encrypted values from this file.
+The dotenv (`.env`) file is an optional but quite handy way to modify and test with your keys during development. It contains the actual secrets for each environment. While config file declares the keys, they are assigned encrypted values from this file.
 
-This file is optional, but quite handy in local development. `.env` files shouldn't be committed as they contain your secrets. Instead, they should be stored in a secure location, like your CI/CD server as environment variables (all CI/CD servers have a way to store secrets securely). See [Continuous Integration](#continuous-integration) for more information.
+> [!CAUTION]
+> `.env` files shouldn't be committed to git as they contain your secrets. Instead, its values should be stored in a secure location, like your CI/CD server as environment variables (all CI/CD services have a way to store secrets securely). See [Continuous Integration](#continuous-integration) for more information.
 
 ### Sample
 
@@ -164,16 +165,19 @@ environments:
 environment_secrets:
   - apiKey
 global_secrets:
-  - clientId
+  - clientID
 ```
 
-Coupled with an env file:
+Coupled with env vars (or a `.env` file):
 
 ```properties
 apiKeyDebug = "your_debug_api_key"
 apiKeyRelease = "your_release_api_key"
-clientId = "your_client_id"
+clientID = "your_client_id"
 ```
+
+> [!IMPORTANT]
+> Notice how arkana needs you to name your env var keys by appending the environment name to the environment secrets, e.g. `apiKey` environment secret requires `apiKeyDebug` and `apiKeyRelease` env vars.
 
 Would generate the following accessors:
 
@@ -181,7 +185,7 @@ Would generate the following accessors:
 // Swift
 public extension ArkanaKeys {
     struct Global: ArkanaKeysGlobalProtocol {
-        public let clientId: String = {<decrypted accessor>}
+        public let clientID: String = {<decrypted accessor>}
     }
 }
 public extension ArkanaKeys {
@@ -196,7 +200,11 @@ public extension ArkanaKeys {
 }
 ```
 
-Note that you have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
+> [!NOTE]
+> You can use PascalCase for your keys in the config file and env var keys, however, Arkana will automatically convert them to camelCase when generating the code. For instance, `MySecretAPIKey` will be converted to `mySecretAPIKey` (just the first letter of the first word will be lowercased).
+
+> [!NOTE]
+> You have to prepend `bundle exec` before `arkana` if you manage your dependencies via bundler, as recommended.
 
 Arkana only has one command, which parses your config file and env vars, generating all the code needed. Arkana should always be run before attempting to build your project, to make sure the files exist _and_ are up-to-date (according to the current config file). This means you might need to add the Arkana run command in your CI/CD scripts, _fastlane_, Xcode Build Phases, or something similar.
 
@@ -339,7 +347,7 @@ This means that, if you are working with a white-label project, you can have all
 
 ## Continuous Integration
 
-We advise you not to commit your `.env` files, because of security concerns. They should live in secure Environment Variables in your build (CI/CD) server instead.
+We advise you not to commit your `.env` files, because they contain your secrets and secrets should generally never be committed to your code repository. They should live in secure Environment Variables in your build (CI/CD) server instead.
 
 Following the [template.yml](template.yml) example file, these would be the variables that would need to be added to your build server env vars:
 
