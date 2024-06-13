@@ -1,5 +1,11 @@
-name: Tests & Linter on PRs
-on: pull_request
+name: Tests & Linter
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   test:
     strategy:
@@ -15,4 +21,5 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: bundle exec rake
+    - name: Run tests and linter
+      run: bundle exec rake
