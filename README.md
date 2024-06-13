@@ -139,7 +139,7 @@ Usage: arkana [options]
 > [!NOTE]
 > For the complete set of args, look at the [options](#options) section.
 
-### Config File
+## Config File
 
 The `arkana.yml` would typically contain 3 important sections:
 
@@ -147,13 +147,13 @@ The `arkana.yml` would typically contain 3 important sections:
 - **Environment Secrets**: This is where you declare the keys which will be ultimately exposed to your app, like `apiKey`.
 - **Global Secrets**: Here you'd declare keys which are the same across all environments.
 
-### Environment File
+## Environment File
 
 The environment (`.env`) file contains the actual secrets for each environment. While config file declares the keys, they are assigned encrypted values from this file.
 
 This file is optional, but quite handy in local development. `.env` files shouldn't be committed as they contain your secrets. Instead, they should be stored in a secure location, like your CI/CD server as environment variables (all CI/CD servers have a way to store secrets securely). See [Continuous Integration](#continuous-integration) for more information.
 
-#### Sample
+### Sample
 
 A config file as shown below:
 
@@ -420,9 +420,9 @@ This encoding mechanism makes it difficult for attackers to simply just read you
 Key security is difficult. Right now even the biggest apps get their keys [leaked](https://threatpost.com/twitter-oauth-api-keys-leaked-030713/77597). This is neatly summed up by John Adams of the Twitter Security Team on [Quora](http://www.quora.com/Twitter-1/How-were-the-Twitter-iPhone-and-Android-OAuth-keys-leaked).
 
 > Putting this in the context of, "should you be storing keys in software", is more appropriate. Many companies do this. It's never a good idea.
-
+>
 > When developers do that, other developers can use debuggers and string searching commands to extract those keys from the running application. There are numerous talks on how to do that, but leave that as an exercise to the reader to find those talks.
-
+>
 > Many people believe that obfuscating these keys in code will help. It usually won't because you can just run a debugger and find the fully functional keys.
 
 So in summary, the ideal way to store keys is to not store keys. In reality though most Apps embed keys, and this does that and adds some rudimentary obfuscation to the keys. A well motivated app cracker could probably extract this within a few minutes however.

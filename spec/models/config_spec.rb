@@ -55,7 +55,7 @@ RSpec.describe Config do
     end
   end
 
-  describe `#environment_keys` do
+  describe "#environment_keys" do
     context "when there are no environments" do
       subject { super().environment_keys }
 
@@ -130,7 +130,7 @@ RSpec.describe Config do
     end
   end
 
-  describe `#all_keys` do
+  describe "#all_keys" do
     it "is not empty" do
       expect(subject.all_keys).not_to be_empty
     end

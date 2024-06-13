@@ -3,6 +3,7 @@
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require "tty-prompt"
+require "tmpdir"
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -14,21 +15,28 @@ task default: %i[spec rubocop]
 
 desc "Generates Swift source code and run its unit tests."
 task :test_swift do
-  sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true bin/arkana --config-filepath spec/fixtures/swift-tests.yml --dotenv-filepath spec/fixtures/.env.fruitloops --include-environments dev,staging")
-  Dir.chdir("tests/MySecrets") do
+  config_file = File.absolute_path("spec/fixtures/swift-tests.yml")
+  dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
+  with_temp_dir do |temp_dir|
+    puts "Current working directory: #{temp_dir}"
+    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+    Dir.chdir("tests/MySecrets")
     sh("swift test")
   end
-  FileUtils.rm_rf("tests")
 end
 
 desc "Generates Kotlin source code and run its unit tests."
 task :test_kotlin do
-  FileUtils.copy_entry("spec/fixtures/kotlin", "tests")
-  sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true bin/arkana --lang kotlin --config-filepath spec/fixtures/kotlin-tests.yml --dotenv-filepath spec/fixtures/.env.fruitloops --include-environments dev,staging")
-  Dir.chdir("tests") do
+  config_file = File.absolute_path("spec/fixtures/kotlin-tests.yml")
+  dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
+  directory_to_copy = File.absolute_path("spec/fixtures/kotlin")
+  with_temp_dir do |temp_dir|
+    puts "Current working directory: #{temp_dir}"
+    FileUtils.copy_entry(directory_to_copy, "tests")
+    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --lang kotlin --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+    Dir.chdir("tests")
     sh("./gradlew test")
   end
-  FileUtils.rm_rf("tests")
 end
 
 desc "Sets lib version to the semantic version given, and push it to remote."
@@ -44,4 +52,16 @@ task :bump, [:v] do |_t, args|
   sh("git add #{version_filename} Gemfile.lock")
   sh("git commit -m 'Bump app version to v#{version}.'")
   sh("git push origin")
+end
+
+# Utilities
+
+# Run tests in a different folder because when running in the same root folder as the gem,
+# there can be "relative_require" that happen to work in the test but wouldn't work when installing the gem in a different project.
+def with_temp_dir
+  Dir.mktmpdir do |temp_dir|
+    Dir.chdir(temp_dir) do
+      yield temp_dir
+    end
+  end
 end
