@@ -143,8 +143,8 @@ Usage: arkana [options]
 
 The `arkana.yml` would typically contain 3 important sections:
 
-- **Environments**: This is typically where you specify `debug`, `release` or other environments which you wish to create.
-- **Environment Secrets**: This is where you declare the keys which will be ultimately exposed to your app, like `apiKey`.
+- **Environments**: This is typically where you specify your environments, or what Xcode calls "configurations", e.g. `debug`, `release` or other environments which you wish to create.
+- **Environment Secrets**: This is where you declare the keys which will be ultimately exposed to your app, e.g. `apiKey`.
 - **Global Secrets**: Here you'd declare keys which are the same across all environments.
 
 ## Dotenv File
