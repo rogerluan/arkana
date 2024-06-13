@@ -12,5 +12,5 @@ gem "rubocop"
 gem "rubocop-rake"
 gem "rubocop-rspec"
 gem "simplecov", require: false, group: :test
-gem "strscan", "~> 3.1.0" # Required by REXML, which is a dependency of RuboCop
+gem "strscan", "~> 1", "< 3" # Required by REXML, which is a dependency of RuboCop. There's a bug on v3 preventing it from building on arm64
 gem "tty-prompt"
