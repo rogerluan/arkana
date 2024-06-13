@@ -25,8 +25,7 @@ GEM
     rainbow (3.1.1)
     rake (13.2.1)
     regexp_parser (2.9.2)
-    rexml (3.3.0)
-      strscan
+    rexml (3.2.6)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -94,6 +93,7 @@ DEPENDENCIES
   rubocop-rake
   rubocop-rspec
   simplecov
+  strscan (~> 3.1.0)
   tty-prompt
 
 BUNDLED WITH
