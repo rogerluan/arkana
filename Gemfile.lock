@@ -80,13 +80,14 @@ GEM
     yaml (0.3.0)
 
 PLATFORMS
-  arm64-darwin-21
   ruby
   x86_64-darwin-19
   x86_64-linux
+  arm64-darwin-23
 
 DEPENDENCIES
   arkana!
+  bundler (< 2.5)
   rake
   rspec
   rubocop
@@ -96,4 +97,4 @@ DEPENDENCIES
   tty-prompt
 
 BUNDLED WITH
-   2.5.9
+   2.3.27
