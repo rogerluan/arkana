@@ -26,10 +26,9 @@ module Encoder
       result << (byte ^ cipher[index % cipher.length]) # XOR operation with a value of the cipher array.
     end
 
-    encoded_key = []
-    result.each do |element|
+    encoded_key = result.map do |element|
       # Warning: this might be specific to Swift implementation. When generating code for other languages, beware.
-      encoded_key << format("%#x", element) # Format the binary number to "0xAB" format.
+      format("%#x", element) # Format the binary number to "0xAB" format.
     end
 
     encoded_key.join(", ")
