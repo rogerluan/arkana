@@ -139,7 +139,7 @@ Usage: arkana [options]
 > [!NOTE]
 > For the complete set of args, look at the [options](#options) section.
 
-### Config File
+## Config File
 
 The `arkana.yml` would typically contain 3 important sections:
 
@@ -147,13 +147,13 @@ The `arkana.yml` would typically contain 3 important sections:
 - **Environment Secrets**: This is where you declare the keys which will be ultimately exposed to your app, like `apiKey`.
 - **Global Secrets**: Here you'd declare keys which are the same across all environments.
 
-### Environment File
+## Environment File
 
 The environment (`.env`) file contains the actual secrets for each environment. While config file declares the keys, they are assigned encrypted values from this file.
 
 This file is optional, but quite handy in local development. `.env` files shouldn't be committed as they contain your secrets. Instead, they should be stored in a secure location, like your CI/CD server as environment variables (all CI/CD servers have a way to store secrets securely). See [Continuous Integration](#continuous-integration) for more information.
 
-#### Sample
+### Sample
 
 A config file as shown below:
 
