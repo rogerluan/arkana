@@ -1,5 +1,9 @@
 name: Kotlin Tests
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 jobs:
   test:
     runs-on: ubuntu-latest # Assuming Kotlin projects can be built on Linux
