@@ -9,7 +9,7 @@ object MySecrets {
         val decoded = encoded.mapIndexed { index, item ->
             (item xor cipher[(index % cipher.size)]).toByte()
         }.toByteArray()
-        return decoded.toString(Charsets.UTF_8)
+        return decoded.decodeToString()
     }
 
     internal fun decodeInt(encoded: List<Int>, cipher: List<Int>): Int {

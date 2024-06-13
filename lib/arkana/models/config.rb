@@ -34,6 +34,8 @@ class Config
   attr_reader :should_generate_gradle_build_file
   # @returns [int]
   attr_reader :kotlin_jvm_toolchain_version
+  # @returns [boolean]
+  attr_reader :is_kotlin_multiplatform_module
 
   # @returns [string]
   attr_accessor :current_flavor
@@ -64,6 +66,8 @@ class Config
     @should_generate_gradle_build_file = yaml["should_generate_gradle_build_file"]
     @should_generate_gradle_build_file = true if @should_generate_gradle_build_file.nil?
     @kotlin_jvm_toolchain_version = yaml["kotlin_jvm_toolchain_version"] || 11
+    @is_kotlin_multiplatform_module = yaml["is_kotlin_multiplatform_module"]
+    @is_kotlin_multiplatform_module = false if @should_generate_gradle_build_file.nil?
   end
   # rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    arkana (2.0.0)
+    arkana (2.1.0)
       dotenv (~> 2.7)
       rainbow (~> 3.1.1)
       yaml (~> 0.2)
