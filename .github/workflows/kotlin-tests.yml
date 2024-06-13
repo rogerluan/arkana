@@ -1,5 +1,9 @@
 name: Kotlin Tests
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 jobs:
   test:
     runs-on: ubuntu-latest # Assuming Kotlin projects can be built on Linux
@@ -21,7 +25,6 @@ jobs:
           ${{ runner.os }}-gradle-
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.3'
         bundler-cache: true # Runs 'bundle install' and caches installed gems automatically
     - name: Generate Kotlin Code & Run Tests
       run: bundle exec rake test_kotlin
