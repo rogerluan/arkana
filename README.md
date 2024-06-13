@@ -12,8 +12,8 @@
   <a href="https://codeclimate.com/github/rogerluan/arkana/test_coverage">
     <img src="https://api.codeclimate.com/v1/badges/2348095bbc0a13342185/test_coverage" />
   </a>
-  <a href="https://github.com/rogerluan/arkana/actions/workflows/push.yml">
-    <img alt="Tests & Linter" src="https://github.com/rogerluan/arkana/actions/workflows/push.yml/badge.svg">
+  <a href="https://github.com/rogerluan/arkana/actions/workflows/run-tests.yml">
+    <img alt="Tests & Linter" src="https://github.com/rogerluan/arkana/actions/workflows/run-tests.yml/badge.svg">
   </a>
   <a href="https://github.com/rogerluan/arkana/actions/workflows/swift-tests.yml">
     <img alt="Swift Tests" src="https://github.com/rogerluan/arkana/actions/workflows/swift-tests.yml/badge.svg">
