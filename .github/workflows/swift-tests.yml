@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-  pull_request
+  pull_request:
 jobs:
   test:
     runs-on: macos-latest
