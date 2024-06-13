@@ -10,10 +10,9 @@ class Salt
 
   def initialize(raw:)
     @raw = raw
-    formatted_salt = []
-    raw.each do |element|
+    formatted_salt = raw.map do |element|
       # Warning: this might be specific to Swift implementation. When generating code for other languages, beware.
-      formatted_salt << format("%#x", element)
+      format("%#x", element)
     end
     @formatted = formatted_salt.join(", ")
   end

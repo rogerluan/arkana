@@ -18,7 +18,7 @@ RSpec.describe Secret do
     end
   end
 
-  describe `#environment` do
+  describe "#environment" do
     subject { super().environment }
 
     context "when key is equal to protocol_key" do

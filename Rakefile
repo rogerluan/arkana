@@ -18,7 +18,7 @@ task :test_swift do
   config_file = File.absolute_path("spec/fixtures/swift-tests.yml")
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
   with_temp_dir do |temp_dir|
-    puts "Current working directory: #{Dir.pwd}"
+    puts "Current working directory: #{temp_dir}"
     sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
     Dir.chdir("tests/MySecrets")
     sh("swift test")
@@ -31,7 +31,7 @@ task :test_kotlin do
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
   directory_to_copy = File.absolute_path("spec/fixtures/kotlin")
   with_temp_dir do |temp_dir|
-    puts "Current working directory: #{Dir.pwd}"
+    puts "Current working directory: #{temp_dir}"
     FileUtils.copy_entry(directory_to_copy, "tests")
     sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --lang kotlin --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
     Dir.chdir("tests")
