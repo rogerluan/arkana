@@ -136,7 +136,7 @@ Usage: arkana [options]
     -l kotlin                        Language to produce keys for, e.g. kotlin, swift. Defaults to 'swift'.
 ```
 
-> [!NOTE]
+> [!TIP]
 > For the complete set of args, look at the [options](#options) section.
 
 ## Config File
