@@ -20,6 +20,8 @@ class TemplateArguments
     @pod_name = config.pod_name
     # The top level namespace in which the keys will be generated. Often an enum.
     @namespace = config.namespace
+    # Dart sources Path
+    @result_path = config.result_path
     # Name of the kotlin package to be used for the generated code.
     @kotlin_package_name = config.kotlin_package_name
     # The kotlin JVM toolchain JDK version to be used in the generated build.gradle file.
