@@ -28,12 +28,11 @@ module DartCodeGenerator
     tests_template = File.read("#{dirname}/templates/dart/arkana_tests.dart.erb")
     FileUtils.mkdir_p(sources_dir)
     if config.should_generate_unit_tests
-        FileUtils.mkdir_p(tests_dir)
+      FileUtils.mkdir_p(tests_dir)
     end
     render(source_template, template_arguments, File.join(sources_dir, "#{config.namespace.downcase}.dart"))
-    if config.should_generate_unit_tests
-        render(tests_template, template_arguments, File.join(tests_dir, "#{config.namespace.downcase}_test.dart"))
-    end
+    return unless config.should_generate_unit_tests
+    render(tests_template, template_arguments, File.join(tests_dir, "#{config.namespace.downcase}_test.dart"))
   end
 
   def self.render(template, template_arguments, destination_file)

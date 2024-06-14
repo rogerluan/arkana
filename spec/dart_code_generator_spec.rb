@@ -37,10 +37,10 @@ RSpec.describe DartCodeGenerator do
     allow(ENV).to receive(:[]).with("ARKANA_RUNNING_CI_INTEGRATION_TESTS").and_return(true)
   end
 
-  after {
+  after do
     FileUtils.rm_rf(File.join("lib", config.result_path))
     FileUtils.rm_rf(File.join("test"))
-  }
+  end
 
   describe ".generate" do
     let(:dart_module_dir) { config.result_path }
