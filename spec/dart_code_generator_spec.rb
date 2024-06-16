@@ -43,7 +43,7 @@ RSpec.describe DartCodeGenerator do
   end
 
   describe ".generate" do
-    let(:dart_module_dir) { config.result_path }
+    let(:dart_module_dir) { config.result_path.downcase }
     let(:dart_sources_dir) { File.join("lib", dart_module_dir) }
     let(:dart_tests_dir) { File.join("test", dart_module_dir) }
 
