@@ -1,0 +1,9 @@
+name: sample
+description: A minimal sample
+version: 1.0.0
+
+environment:
+  sdk: ^3.4.0
+
+dev_dependencies:
+  test: ^1.25.7
