@@ -23,12 +23,14 @@ module Arkana
         salt: salt,
         current_flavor: config.current_flavor,
         environments: config.environments,
+        inference_secret_type: config.inference_secret_types,
       )
       global_secrets = Encoder.encode!(
         keys: config.global_secrets,
         salt: salt,
         current_flavor: config.current_flavor,
         environments: config.environments,
+        inference_secret_type: config.inference_secret_types,
       )
     rescue StandardError => e
       # TODO: Improve this by creating an Env/Debug helper

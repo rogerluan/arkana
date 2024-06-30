@@ -20,4 +20,8 @@ module Type
         STRING
     end
   end
+
+  def self.default_string
+    return STRING
+  end
 end

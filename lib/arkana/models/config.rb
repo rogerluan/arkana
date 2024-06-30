@@ -36,6 +36,8 @@ class Config
   attr_reader :kotlin_jvm_toolchain_version
   # @returns [boolean]
   attr_reader :is_kotlin_multiplatform_module
+  # @returns [boolean]
+  attr_reader :inference_secret_types
 
   # @returns [string]
   attr_accessor :current_flavor
