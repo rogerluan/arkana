@@ -14,7 +14,7 @@ kotlin_sources_path: 'java' # Optional. The path for the generated Kotlin classe
 should_generate_gradle_build_file: true # Optional. Whether a build.gradle file should be generated, when running the Kotlin generator. One of: true, false. Defaults to true.
 is_kotlin_multiplatform_module: true # Optional. Whether the generated Kotlin module is a multiplatform module. One of: true, false. Defaults to false.
 kotlin_jvm_toolchain_version: 11 # Optional. The kotlin JVM toolchain JDK version to be used in the generated build.gradle file. Defaults to 11.
-inference_value_types: true # Optional. Whether if arkana inferences the types of the values. If false the type will always be String. Defaults to true.
+should_infer_types: true # Optional. Whether type inference should be done based on the values of the secrets. When false, the type will always be string for all languages. One of: true, false. Defaults to true.
 environments: # Optional. List of environments that will be used to generate secret keys when you have keys that are different between environments (e.g. debug/staging/prod). Defaults to empty.
   - Debug
   - Release
