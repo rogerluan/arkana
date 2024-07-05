@@ -7,11 +7,11 @@ module Encoder
   # Fetches values of each key from ENV, and encodes them using the given salt.
   #
   # @return [Secret[]] an array of Secret objects, which contain their keys and encoded values.
-  def self.encode!(keys:, salt:, current_flavor:, environments:, inference_secret_type:)
+  def self.encode!(keys:, salt:, current_flavor:, environments:, should_infer_types:)
     keys.map do |key|
       secret = find_secret!(key: key, current_flavor: current_flavor)
       encoded_value = encode(secret, salt.raw)
-      secret_type = inference_secret_type ? Type.new(string_value: secret) : Type.default_string
+      secret_type = should_infer_types ? Type.new(string_value: secret) : Type.default_type
       protocol_key = protocol_key(key: key, environments: environments)
       Secret.new(key: key, protocol_key: protocol_key, encoded_value: encoded_value, type: secret_type)
     end
