@@ -70,6 +70,8 @@ class Config
     @kotlin_jvm_toolchain_version = yaml["kotlin_jvm_toolchain_version"] || 11
     @is_kotlin_multiplatform_module = yaml["is_kotlin_multiplatform_module"]
     @is_kotlin_multiplatform_module = false if @should_generate_gradle_build_file.nil?
+    @should_infer_types = yaml["should_infer_types"]
+    @should_infer_types = true if @should_infer_types.nil?
   end
   # rubocop:enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
