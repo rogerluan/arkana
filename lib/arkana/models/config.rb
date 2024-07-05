@@ -37,7 +37,7 @@ class Config
   # @returns [boolean]
   attr_reader :is_kotlin_multiplatform_module
   # @returns [boolean]
-  attr_reader :inference_secret_types
+  attr_reader :should_infer_types
 
   # @returns [string]
   attr_accessor :current_flavor
