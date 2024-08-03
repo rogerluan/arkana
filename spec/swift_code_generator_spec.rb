@@ -9,6 +9,7 @@ RSpec.describe SwiftCodeGenerator do
       salt: salt,
       current_flavor: config.current_flavor,
       environments: config.environments,
+      should_infer_types: config.should_infer_types,
     )
   end
 
@@ -18,6 +19,7 @@ RSpec.describe SwiftCodeGenerator do
       salt: salt,
       current_flavor: config.current_flavor,
       environments: config.environments,
+      should_infer_types: config.should_infer_types,
     )
   end
 
