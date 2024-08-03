@@ -6,6 +6,7 @@ RSpec.describe Encoder do
   let(:salt) { SaltGenerator.generate }
   let(:environments) { [] }
   let(:current_flavor) { nil }
+  let(:should_infer_types) { true }
 
   describe ".encode!" do
     context "when keys is empty" do
