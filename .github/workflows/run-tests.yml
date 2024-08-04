@@ -18,6 +18,6 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        bundler-cache: true # Runs 'bundle install' and caches installed gems automatically
     - name: Run tests and linter
       run: bundle exec rake
