@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe Encoder do
-  subject { described_class.encode!(keys: keys, salt: salt, current_flavor: current_flavor, environments: environments) }
+  subject { described_class.encode!(keys: keys, salt: salt, current_flavor: current_flavor, environments: environments, should_infer_types: should_infer_types) }
 
   let(:salt) { SaltGenerator.generate }
   let(:environments) { [] }
   let(:current_flavor) { nil }
+  let(:should_infer_types) { true }
 
   describe ".encode!" do
     context "when keys is empty" do
