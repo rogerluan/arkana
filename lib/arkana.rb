@@ -8,6 +8,7 @@ require_relative "arkana/models/template_arguments"
 require_relative "arkana/salt_generator"
 require_relative "arkana/swift_code_generator"
 require_relative "arkana/kotlin_code_generator"
+require_relative "arkana/dart_code_generator"
 require_relative "arkana/version"
 
 # Top-level namespace for Arkana's execution entry point. When ran from CLI, `Arkana.run` is what is invoked.
@@ -48,6 +49,7 @@ module Arkana
     generator = case config.current_lang.downcase
       when "swift" then SwiftCodeGenerator
       when "kotlin" then KotlinCodeGenerator
+      when "dart" then DartCodeGenerator
       else UI.crash("Unknown output lang selected: #{config.current_lang}")
     end
 

@@ -1,0 +1,32 @@
+import_name: 'MySecrets'
+namespace: 'MySecrets'
+result_path: 'tests'
+should_generate_unit_tests: true
+global_secrets:
+  - BoolAsStringTrueKey
+  - BoolAsStringFalseKey
+  - BoolAsBoolTrueKey
+  - BoolAsBoolFalseKey
+  - IntAsStringKey
+  - IntAsNumberKey
+  - IntWithLeadingZeroesAsStringKey
+  - IntWithLeadingZeroesAsNumberKey
+  - MassiveIntAsStringKey
+  - MassiveIntAsNumberKey
+  - NegativeIntAsStringKey
+  - NegativeIntAsNumberKey
+  - FloatAsStringKey
+  - FloatAsNumberKey
+  - SecretWithDollarSignEscapedAndAndNoQuotesKey
+  - SecretWithDollarSignEscapedAndDoubleQuoteKey
+  - SecretWithDollarSignNotEscapedAndSingleQuoteKey
+  - SecretWithDollarSignNotEscapedAndDoubleQuotesKey
+  - SecretWithDollarSignNotEscapedAndNoQuotesKey
+  - SecretWithWeirdCharactersKey
+environments:
+  - dev
+  - staging
+  - prod
+environment_secrets:
+  - ServiceKey
+  - Server
