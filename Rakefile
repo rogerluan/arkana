@@ -40,7 +40,7 @@ task :test_kotlin do
 end
 
 desc "Generates Swift source code and run its unit tests with false should infer types."
-task :test_swift do
+task :test_swift_no_infer_types do
   config_file = File.absolute_path("spec/fixtures/swift-tests_with_no_infer_types.yml")
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
   with_temp_dir do |temp_dir|
