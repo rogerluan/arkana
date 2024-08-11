@@ -51,15 +51,17 @@ task :test_kotlin do
   end
 end
 
-desc "Generates Swift source code and run its unit tests with false should infer types."
-task :test_swift_no_infer_types do
-  config_file = File.absolute_path("spec/fixtures/swift-tests_with_no_infer_types.yml")
+desc "Generates Kotlin source code and run its unit tests with no infer types."
+task :test_kotlin_with_no_infer_types do
+  config_file = File.absolute_path("spec/fixtures/kotlin-tests_with_no_infer_types.yml")
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
+  directory_to_copy = File.absolute_path("spec/fixtures/kotlin")
   with_temp_dir do |temp_dir|
     puts "Current working directory: #{temp_dir}"
-    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
-    Dir.chdir("tests/MySecrets")
-    sh("swift test")
+    FileUtils.copy_entry(directory_to_copy, "tests")
+    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --lang kotlin --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+    Dir.chdir("tests")
+    sh("./gradlew test")
   end
 end
 
