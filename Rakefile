@@ -39,6 +39,18 @@ task :test_kotlin do
   end
 end
 
+desc "Generates Swift source code and run its unit tests with false should infer types."
+task :test_swift do
+  config_file = File.absolute_path("spec/fixtures/swift-tests_with_no_infer_types.yml")
+  dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
+  with_temp_dir do |temp_dir|
+    puts "Current working directory: #{temp_dir}"
+    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+    Dir.chdir("tests/MySecrets")
+    sh("swift test")
+  end
+end
+
 desc "Sets lib version to the semantic version given, and push it to remote."
 task :bump, [:v] do |_t, args|
   version = args[:v] || raise("A version is required. Pass it like `rake bump[1.2.3]`")
