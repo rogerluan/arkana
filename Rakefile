@@ -25,6 +25,18 @@ task :test_swift do
   end
 end
 
+desc "Generates Swift source code and run its unit tests with no infer types."
+task :test_swift_with_no_infer_types do
+  config_file = File.absolute_path("spec/fixtures/swift-tests_with_no_infer_types.yml")
+  dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
+  with_temp_dir do |temp_dir|
+    puts "Current working directory: #{temp_dir}"
+    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+    Dir.chdir("tests/MySecrets")
+    sh("swift test")
+  end
+end
+
 desc "Generates Kotlin source code and run its unit tests."
 task :test_kotlin do
   config_file = File.absolute_path("spec/fixtures/kotlin-tests.yml")
