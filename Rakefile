@@ -21,14 +21,14 @@ task :test_swift do
 
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
 
-  config_array.each { |config_file|
+  config_array.each do |config_file|
     with_temp_dir do |temp_dir|
       puts "Current working directory: #{temp_dir}"
       sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
       Dir.chdir("tests/MySecrets")
       sh("swift test")
     end
-  }
+  end
   
 end
 
