@@ -16,7 +16,7 @@ task default: %i[spec rubocop]
 desc "Generates Swift source code and run its unit tests."
 task :test_swift do
   config_file_default = File.absolute_path("spec/fixtures/swift-tests.yml")
-  config_file_no_infer_types = File.absolute_path("spec/fixtures/swift-tests_with_no_infer_types.yml")
+  config_file_no_infer_types = File.absolute_path("spec/fixtures/swift-tests-with-no-infer-types.yml")
   config_file_array = [config_file_default, config_file_no_infer_types]
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
   config_file_array.each do |config_file|
@@ -32,7 +32,7 @@ end
 desc "Generates Kotlin source code and run its unit tests."
 task :test_kotlin do
   config_file_default = File.absolute_path("spec/fixtures/kotlin-tests.yml")
-  config_file_no_infer_types = File.absolute_path("spec/fixtures/kotlin-tests_with_no_infer_types.yml")
+  config_file_no_infer_types = File.absolute_path("spec/fixtures/kotlin-tests-with-no-infer-types.yml")
   config_file_array = [config_file_default, config_file_no_infer_types]
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
   directory_to_copy = File.absolute_path("spec/fixtures/kotlin")
