@@ -18,9 +18,7 @@ task :test_swift do
   config_file_default = File.absolute_path("spec/fixtures/swift-tests.yml")
   config_file_no_infer_types = File.absolute_path("spec/fixtures/swift-tests_with_no_infer_types.yml")
   config_array = [config_file_default, config_file_no_infer_types]
-
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
-
   config_array.each do |config_file|
     with_temp_dir do |temp_dir|
       puts "Current working directory: #{temp_dir}"
