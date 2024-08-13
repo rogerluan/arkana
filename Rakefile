@@ -15,26 +15,21 @@ task default: %i[spec rubocop]
 
 desc "Generates Swift source code and run its unit tests."
 task :test_swift do
-  config_file = File.absolute_path("spec/fixtures/swift-tests.yml")
-  dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
-  with_temp_dir do |temp_dir|
-    puts "Current working directory: #{temp_dir}"
-    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
-    Dir.chdir("tests/MySecrets")
-    sh("swift test")
-  end
-end
+  config_file_default = File.absolute_path("spec/fixtures/swift-tests.yml")
+  config_file_no_infer_types = File.absolute_path("spec/fixtures/swift-tests_with_no_infer_types.yml")
+  config_array = [config_file_default, config_file_no_infer_types]
 
-desc "Generates Swift source code and run its unit tests with no infer types."
-task :test_swift_with_no_infer_types do
-  config_file = File.absolute_path("spec/fixtures/swift-tests_with_no_infer_types.yml")
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
-  with_temp_dir do |temp_dir|
-    puts "Current working directory: #{temp_dir}"
-    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
-    Dir.chdir("tests/MySecrets")
-    sh("swift test")
-  end
+
+  config_array.each { |config_file|
+    with_temp_dir do |temp_dir|
+      puts "Current working directory: #{temp_dir}"
+      sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+      Dir.chdir("tests/MySecrets")
+      sh("swift test")
+    end
+  }
+  
 end
 
 desc "Generates Kotlin source code and run its unit tests."
