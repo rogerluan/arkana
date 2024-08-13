@@ -36,7 +36,7 @@ task :test_kotlin do
   config_file_array = [config_file_default, config_file_no_infer_types]
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
   directory_to_copy = File.absolute_path("spec/fixtures/kotlin")
-  config_file_array do |config_file| 
+  config_file_array do |config_file|
     with_temp_dir do |temp_dir|
       puts "Current working directory: #{temp_dir}"
       FileUtils.copy_entry(directory_to_copy, "tests")
