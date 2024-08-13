@@ -29,7 +29,6 @@ task :test_swift do
       sh("swift test")
     end
   end
-  
 end
 
 desc "Generates Kotlin source code and run its unit tests."
