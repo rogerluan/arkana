@@ -47,6 +47,20 @@ task :test_kotlin do
   end
 end
 
+desc "Generates dart source code and run its unit tests."
+task :test_dart do
+  config_file = File.absolute_path("spec/fixtures/dart-tests.yml")
+  dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
+  directory_to_copy = File.absolute_path("spec/fixtures/dart")
+  with_temp_dir do |temp_dir|
+    puts "Current working directory: #{temp_dir}"
+    FileUtils.copy_entry(directory_to_copy, "tests")
+    Dir.chdir("tests")
+    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true && arkana --lang dart --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+    sh("dart test")
+  end
+end
+
 desc "Sets lib version to the semantic version given, and push it to remote."
 task :bump, [:v] do |_t, args|
   version = args[:v] || raise("A version is required. Pass it like `rake bump[1.2.3]`")

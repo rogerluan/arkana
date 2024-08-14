@@ -1,0 +1,26 @@
+name: Dart Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dart-lang/setup-dart@v1
+      with:
+        sdk: 3.4.0
+    - name: Cache Dart dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.pub-cache
+        key: ${{ runner.os }}-dart-${{ hashFiles('**/pubspec.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-dart-
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true # Runs 'bundle install' and caches installed gems automatically
+    - name: Generate Dart Code & Run Tests
+      run: bundle exec rake test_dart
