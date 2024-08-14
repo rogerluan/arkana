@@ -20,4 +20,9 @@ module Type
         STRING
     end
   end
+
+  # The default type to use when we shouldn't be inferring types.
+  def self.default_type
+    STRING
+  end
 end

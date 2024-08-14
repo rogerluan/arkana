@@ -15,27 +15,35 @@ task default: %i[spec rubocop]
 
 desc "Generates Swift source code and run its unit tests."
 task :test_swift do
-  config_file = File.absolute_path("spec/fixtures/swift-tests.yml")
+  config_file_default = File.absolute_path("spec/fixtures/swift-tests.yml")
+  config_file_no_infer_types = File.absolute_path("spec/fixtures/swift-tests-with-no-infer-types.yml")
+  config_file_array = [config_file_default, config_file_no_infer_types]
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
-  with_temp_dir do |temp_dir|
-    puts "Current working directory: #{temp_dir}"
-    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
-    Dir.chdir("tests/MySecrets")
-    sh("swift test")
+  config_file_array.each do |config_file|
+    with_temp_dir do |temp_dir|
+      puts "Current working directory: #{temp_dir}"
+      sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+      Dir.chdir("tests/MySecrets")
+      sh("swift test")
+    end
   end
 end
 
 desc "Generates Kotlin source code and run its unit tests."
 task :test_kotlin do
-  config_file = File.absolute_path("spec/fixtures/kotlin-tests.yml")
+  config_file_default = File.absolute_path("spec/fixtures/kotlin-tests.yml")
+  config_file_no_infer_types = File.absolute_path("spec/fixtures/kotlin-tests-with-no-infer-types.yml")
+  config_file_array = [config_file_default, config_file_no_infer_types]
   dotenv_file = File.absolute_path("spec/fixtures/.env.fruitloops")
   directory_to_copy = File.absolute_path("spec/fixtures/kotlin")
-  with_temp_dir do |temp_dir|
-    puts "Current working directory: #{temp_dir}"
-    FileUtils.copy_entry(directory_to_copy, "tests")
-    sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --lang kotlin --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
-    Dir.chdir("tests")
-    sh("./gradlew test")
+  config_file_array.each do |config_file|
+    with_temp_dir do |temp_dir|
+      puts "Current working directory: #{temp_dir}"
+      FileUtils.copy_entry(directory_to_copy, "tests")
+      sh("ARKANA_RUNNING_CI_INTEGRATION_TESTS=true arkana --lang kotlin --config-filepath #{config_file} --dotenv-filepath #{dotenv_file} --include-environments dev,staging")
+      Dir.chdir("tests")
+      sh("./gradlew test")
+    end
   end
 end
 
