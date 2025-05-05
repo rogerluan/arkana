@@ -1,15 +1,17 @@
 name: Swift Tests
+
 on:
   push:
     branches:
       - main
   pull_request:
+
 jobs:
   test:
     runs-on: macos-latest
     steps:
-    - uses: fwal/setup-swift@v1
-    - uses: actions/checkout@v2
+    - uses: swift-actions/setup-swift@v2
+    - uses: actions/checkout@v4
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true # Runs 'bundle install' and caches installed gems automatically
