@@ -12,10 +12,6 @@ jobs:
     steps:
     - uses: swift-actions/setup-swift@v2
     - uses: actions/checkout@v4
-    - name: Install System Dependencies
-      run: |
-        brew install gcc # Install C compiler
-        xcode-select --install || echo "Command line tools already installed" # Ensure Xcode command line tools are present
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true # Runs 'bundle install' and caches installed gems automatically
