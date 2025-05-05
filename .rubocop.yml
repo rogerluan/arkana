@@ -2,7 +2,7 @@ inherit_from: .rubocop_todo.yml
 
 # Last reviewed on Aug 31st 2023, using RuboCop v1.56.1
 
-require:
+plugins:
   - rubocop-rake
   - rubocop-rspec
 
