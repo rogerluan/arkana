@@ -9,12 +9,12 @@ jobs:
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: head
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - uses: paambaati/codeclimate-action@v6.0.0
+    - uses: paambaati/codeclimate-action@v9
       with:
         coverageCommand: bundle exec rake
         debug: true
