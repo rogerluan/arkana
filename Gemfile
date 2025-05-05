@@ -6,6 +6,8 @@ source "https://rubygems.org"
 gemspec
 
 gem "bundler", "< 2.5" # 2.4.x is the latest that supports Ruby 2.7, which is the minimum required by Arkana
+gem "json"
+gem "prism"
 gem "rake"
 gem "rspec"
 gem "rubocop"
