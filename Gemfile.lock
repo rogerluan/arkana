@@ -93,8 +93,6 @@ PLATFORMS
 DEPENDENCIES
   arkana!
   bundler (< 2.5)
-  json
-  prism
   rake
   rspec
   rubocop
